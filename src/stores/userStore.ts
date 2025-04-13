@@ -10,6 +10,7 @@ export interface UserProfile {
   genres?: string[];
   games?: string[];
   playerType?: string;
+  isAdmin?: boolean;  // Added admin flag
 }
 
 interface UserState {
@@ -36,6 +37,9 @@ interface UserState {
   deleteProfile: (id: string) => void;
   isNameUnique: (name: string, excludeId?: string) => boolean;
   resetData: () => void;
+
+  // Add isCurrentUserAdmin helper
+  isCurrentUserAdmin: () => boolean;
 }
 
 // Generate a random ID
@@ -288,6 +292,50 @@ export const useUserStore = create<UserState>(
         localStorage.removeItem("user-session");
         set({ profiles: [], activeProfileId: null, viewingProfileId: null });
       },
+
+      // Check if current user is admin
+      isCurrentUserAdmin: () => {
+        const { profiles, activeProfileId } = get();
+        if (!activeProfileId) return false;
+        
+        const activeProfile = profiles.find(p => p.id === activeProfileId);
+        return activeProfile?.isAdmin === true;
+      },
+
+      // Load event handler - create admin account if it doesn't exist
+      onLoad: () => {
+        const { profiles } = get();
+        const adminExists = profiles.some(profile => 
+          profile.name.toLowerCase() === 'admin' && profile.isAdmin === true
+        );
+        
+        console.log("Admin check on load:", { 
+          adminExists, 
+          profileCount: profiles.length,
+          hasAdminAccount: profiles.some(p => p.name.toLowerCase() === 'admin')
+        });
+        
+        if (!adminExists) {
+          // Create admin account
+          const id = generateId();
+          const adminProfile: UserProfile = {
+            id,
+            name: 'admin',
+            passwordHash: 'adminpass', // In production, use proper password hashing
+            createdAt: Date.now(),
+            isAdmin: true
+          };
+          
+          console.log("Creating admin account with ID:", id);
+          
+          set(state => ({
+            profiles: [...state.profiles, adminProfile]
+          }));
+          
+          // Update the user name in the location store's map
+          useLocationStore.getState().updateUserName(id, 'admin');
+        }
+      },
     }),
     {
       docId: "player-finder-users-auth", // Changed doc ID to avoid conflict with existing data
@@ -295,6 +343,8 @@ export const useUserStore = create<UserState>(
       onInitComplete: (store) => {
         // Check for existing session after data is loaded
         store.checkSession();
+        // Create admin account if it doesn't exist
+        store.onLoad();
       },
       onInitError: (error) => {
         console.error("User sync initialization error:", error);

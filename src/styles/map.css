@@ -1,0 +1,32 @@
+/* Map styles */
+
+/* Ensure tooltip appears above other elements */
+.mapkit-callout {
+  z-index: 1000;
+}
+
+/* Cluster callout specific styles */
+.mapkit-cluster-callout::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mapkit-cluster-callout::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 3px;
+}
+
+.mapkit-cluster-callout::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+/* Add styles for the cluster marker */
+.cluster-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}

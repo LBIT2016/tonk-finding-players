@@ -18,13 +18,15 @@ import {
 import PlaceSearch from "./PlaceSearch";
 import UserSelector from "./UserSelector";
 import TourGuide from "./TourGuide";
-import GameCategorySelector from './GameCategorySelector';
 import OtherUsersList from "./OtherUsersList";
 import GameFilters from "./GameFilters";
+import CommunityFormPanel from "./CommunityFormPanel";
 import ResetDataButton from "./ResetDataButton";
-import { TabsList, TabsTrigger, TabsContent, Tabs } from "../components/ui/tabs";
-import { Gamepad2 } from "lucide-react";
 import AuthForm from "./AuthForm";
+import LocationDetailPanel from "./LocationDetailPanel"; // Import the new component
+import { FilterOptions, GAME_TO_GENRE } from "../types/gameTypes";
+import { createMapPinCallout } from "./map/MapPinCallout";
+import { MapPinManager } from "./map/MapPinManager"; // Add this import
 
 // Declare MapKit JS types
 declare global {
@@ -88,21 +90,17 @@ const MapKitInitializer: React.FC<MapKitInitializerProps> = ({}) => {
 };
 
 const MapView: React.FC = () => {
-  const { locations, addReview, removeReview, addLocation } =
-    useLocationStore();
+  const { 
+    locations, 
+    addReview, 
+    removeReview, 
+    addLocation,
+    // Add deleteLocation import
+    deleteLocation 
+  } = useLocationStore();
   const { profiles, activeProfileId } = useUserStore();
   const { categories } = useCategoryStore();
   const [isAddingLocation, setIsAddingLocation] = useState(false);
-  const [addingType, setAddingType] = useState<'location'|'community'>('location');
-  const [newLocation, setNewLocation] = useState({
-    name: "",
-    description: "",
-    latitude: 0,
-    longitude: 0,
-    placeId: "",
-    category: "free",
-    tags: [] as string[]
-  });
   const [newCommunity, setNewCommunity] = useState({
     name: "",
     description: "",
@@ -112,9 +110,15 @@ const MapView: React.FC = () => {
     category: "free",
     tags: [] as string[],
     gameType: "",
+    genre: "",
+    playerRoles: [] as string[],
     playersNeeded: 1,
     experienceLevel: "all",
-    schedule: "",
+    schedule: {
+      days: [] as string[],
+      time: "",
+      frequency: ""
+    },
     contactInfo: ""
   });
   const [tagInput, setTagInput] = useState("");
@@ -126,7 +130,6 @@ const MapView: React.FC = () => {
   const mapInstanceRef = useRef<any>(null);
   const markersRef = useRef<any[]>([]);
   const [mapIsReady, setMapIsReady] = useState(false);
-  // const [isGettingLocation, setIsGettingLocation] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState<string | null>(null);
   const [showReviewPanel, setShowReviewPanel] = useState(false);
   const [reviewRating, setReviewRating] = useState(5);
@@ -184,49 +187,48 @@ const MapView: React.FC = () => {
     persistAfterReload?: boolean;
   }[] = [
     {
-      title: "Welcome to My World!",
+      title: "Welcome to Finding Players!",
       content:
-        "This is a demo app made by Tonk to get you started. Let's take a quick look around. Click 'Next' to begin.",
+        "This app helps you discover gaming communities, find players, and organize game sessions near you. Let's take a quick tour!",
       position: "center",
     },
     {
       target: ".user-selector",
-      title: "User Profiles",
+      title: "Your Gaming Profile",
       content:
-        "Create and switch between different user profiles to manage your locations.",
-      position: "right",
-    },
-    {
-      target: ".category-manager",
-      title: "Categories",
-      content:
-        "Organise your locations by creating custom categories with colours.",
-      position: "right",
-    },
-    {
-      target: ".location-list",
-      title: "Saved Locations",
-      content:
-        "View all your saved locations here. Click on any location to see details.",
+        "Manage your player profile here. Add your preferred games, genres, and gaming style to help others find you.",
       position: "right",
     },
     {
       target: ".search-bar",
-      title: "Interactive Map",
+      title: "Find Game Locations",
       content:
-        "Use the search bar to add a new location to the map, then continue to the next step.",
+        "Search for game stores, community centers, or cafes where players gather. You can also click anywhere on the map to add new gaming spots.",
       position: "right",
     },
     {
-      title: "Transparent Data",
+      target: ".category-manager",
+      title: "Game Categories",
       content:
-        "Go back to the Tonk Hub and navigate to the file <code>my-world-locations.automerge</code> under <code>stores</code>. You should see your new location present in the list.",
+        "Filter locations by game type, like TTRPGs, board games, or video games to find the perfect spot for your next session.",
+      position: "right",
+    },
+    {
+      title: "Add Game Communities",
+      content:
+        "Create or join gaming communities by clicking on the map and selecting 'Game Community'. Share details about what you're playing, when, and how many players you need.",
       position: "center",
     },
     {
-      title: "Add a Feature",
+      title: "Connect with Players",
       content:
-        "If you haven't already, open this project in your AI editor of choice and run the following prompt:\n\n\"Add a new 'Bucket List' feature that lets users star saved locations and displays them in a special list under saved locations in the sidebar.\"",
+        "Browse profiles of other players in your area, view their game preferences, and connect to expand your gaming circle.",
+      position: "center",
+    },
+    {
+      title: "Ready to Play!",
+      content:
+        "Now you're all set to find players for your next gaming session. Create your profile, find a venue, and start connecting with fellow gamers!",
       position: "center",
       persistAfterReload: true,
     },
@@ -234,6 +236,9 @@ const MapView: React.FC = () => {
 
   // Default map center
   const defaultCenter: [number, number] = [51.505, -0.09]; // London
+
+  // Add a reference for the pin manager
+  const pinManagerRef = useRef<MapPinManager | null>(null);
 
   // Initialize MapKit JS map
   useEffect(() => {
@@ -298,6 +303,40 @@ const MapView: React.FC = () => {
       darkModeMediaQuery.addEventListener("change", handleColorSchemeChange);
 
       mapInstanceRef.current = map;
+      
+      // Initialize the pin manager
+      pinManagerRef.current = new MapPinManager({
+        mapInstance: map,
+        clusteringDistance: 40 // Cluster pins within 40px of each other
+      });
+      
+      // Set up the cluster select callback
+      if (pinManagerRef.current) {
+        pinManagerRef.current.setClusterSelectCallback((markers) => {
+          // If there's only one marker in the "cluster", show its details directly
+          if (markers.length === 1 && markers[0].locationId) {
+            setSelectedLocation(markers[0].locationId);
+            setShowReviewPanel(false);
+            
+            // Fetch business hours if needed
+            const location = locations[markers[0].locationId];
+            if (location?.placeId) {
+              setIsLoadingHours(true);
+              setBusinessHours(null);
+              fetchAndUpdateBusinessHours(markers[0].locationId)
+                .then((hours) => {
+                  setBusinessHours(hours);
+                  setIsLoadingHours(false);
+                })
+                .catch((error) => {
+                  console.error("Error fetching business hours:", error);
+                  setIsLoadingHours(false);
+                });
+            }
+          }
+        });
+      }
+      
       setMapIsReady(true);
 
       return () => {
@@ -305,6 +344,11 @@ const MapView: React.FC = () => {
           "change",
           handleColorSchemeChange,
         );
+        
+        // Clean up pin manager when component unmounts
+        if (pinManagerRef.current) {
+          pinManagerRef.current.destroy();
+        }
       };
     }
   }, [mapRef.current, window.mapkit, isAuthenticated]);
@@ -332,25 +376,14 @@ const MapView: React.FC = () => {
   ) => {
     const effectivePlaceId = placeId || "";
 
-    if (addingType === 'location') {
-      setNewLocation({
-        ...newLocation,
-        name: name,
-        latitude: latitude,
-        longitude: longitude,
-        placeId: effectivePlaceId,
-        category: "free" // Always set to free by default
-      });
-    } else {
-      setNewCommunity({
-        ...newCommunity,
-        name: name,
-        latitude: latitude,
-        longitude: longitude,
-        placeId: effectivePlaceId,
-        category: "free" // Always set to free by default
-      });
-    }
+    setNewCommunity({
+      ...newCommunity,
+      name: name,
+      latitude: latitude,
+      longitude: longitude,
+      placeId: effectivePlaceId,
+      category: "free" // Always set to free by default
+    });
 
     // Center the map on the selected location
     setMapCenter([latitude, longitude]);
@@ -394,19 +427,11 @@ const MapView: React.FC = () => {
 
   // Handle manual location pick from map click
   const handleLocationPick = (lat: number, lng: number) => {
-    if (addingType === 'location') {
-      setNewLocation((prev) => ({
-        ...prev,
-        latitude: lat,
-        longitude: lng,
-      }));
-    } else {
-      setNewCommunity((prev) => ({
-        ...prev,
-        latitude: lat,
-        longitude: lng,
-      }));
-    }
+    setNewCommunity((prev) => ({
+      ...prev,
+      latitude: lat,
+      longitude: lng,
+    }));
 
     // Add temporary marker for new location
     if (mapIsReady && mapInstanceRef.current) {
@@ -422,7 +447,7 @@ const MapView: React.FC = () => {
         new window.mapkit.Coordinate(lat, lng),
         {
           color: "#34C759", // Green color for new location
-          title: "New Location",
+          title: "New Game Community",
           glyphText: "+",
         },
       );
@@ -433,19 +458,93 @@ const MapView: React.FC = () => {
     }
   };
 
+  // Add filter state
+  const [activeFilters, setActiveFilters] = useState<FilterOptions>({});
+  const [filteredLocations, setFilteredLocations] = useState<Record<string, any>>(locations);
+
+  // Filter locations based on active filters
+  useEffect(() => {
+    if (!Object.keys(activeFilters).some(key => activeFilters[key as keyof FilterOptions] !== null && 
+       activeFilters[key as keyof FilterOptions] !== undefined)) {
+      // If no filters are active, show all locations
+      setFilteredLocations(locations);
+      return;
+    }
+    
+    // Apply filters
+    const filtered = Object.entries(locations).reduce((acc, [id, location]) => {
+      // Default to including the location
+      let include = true;
+      
+      // Get community data if available
+      const communityData = location.communityData || {};
+      
+      // Filter by genre
+      if (activeFilters.genre && include) {
+        const locationGenre = communityData.genre || 
+          (location.gameType ? GAME_TO_GENRE[location.gameType] : null);
+        include = locationGenre === activeFilters.genre;
+      }
+      
+      // Filter by game
+      if (activeFilters.game && include) {
+        include = location.gameType === activeFilters.game;
+      }
+      
+      // Filter by player type
+      if (activeFilters.playerType && include) {
+        include = communityData.playerRoles && 
+          communityData.playerRoles.includes(activeFilters.playerType);
+      }
+      
+      // Filter by experience level
+      if (activeFilters.experienceLevel && include) {
+        include = communityData.experienceLevel === activeFilters.experienceLevel;
+      }
+      
+      // Filter by players needed
+      if (activeFilters.playersNeeded && include) {
+        include = (communityData.playersNeeded || 0) >= activeFilters.playersNeeded;
+      }
+      
+      // Filter by schedule days
+      if (activeFilters.scheduleDays && activeFilters.scheduleDays.length > 0 && include) {
+        // Match if any day matches
+        include = communityData.schedule?.days?.some((day: string) => 
+          activeFilters.scheduleDays?.includes(day)
+        ) || false;
+      }
+      
+      // Filter by recently added (last 7 days)
+      if (activeFilters.recentlyAdded && include) {
+        const createdAt = communityData.createdAt || location.createdAt;
+        const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+        include = createdAt > sevenDaysAgo;
+      }
+      
+      // Only include if it passes all filters
+      if (include) {
+        acc[id] = location;
+      }
+      
+      return acc;
+    }, {} as Record<string, any>);
+    
+    setFilteredLocations(filtered);
+  }, [locations, activeFilters]);
+
   // Function to update map markers
   const updateMapMarkers = () => {
-    if (!mapIsReady || !mapInstanceRef.current) return;
+    if (!mapIsReady || !mapInstanceRef.current || !pinManagerRef.current) return;
 
-    // Remove all existing markers except temporary one
+    // Save reference to temporary marker if it exists
     const tempMarker = markersRef.current.find((m) => m.isTemporary);
-    mapInstanceRef.current.removeAnnotations(
-      markersRef.current.filter((m) => !m.isTemporary),
-    );
-    markersRef.current = tempMarker ? [tempMarker] : [];
+    
+    // Create an array to hold all markers
+    const newMarkers = tempMarker ? [tempMarker] : [];
 
-    // Add markers for all locations
-    const markers = Object.values(locations).map((location) => {
+    // Add markers for all FILTERED locations instead of all locations
+    Object.values(filteredLocations).forEach((location) => {
       // Determine marker color based on category and who added it
       let markerColor = appleColors.blue; // Default blue for current user's locations
 
@@ -474,58 +573,33 @@ const MapView: React.FC = () => {
       // Add callout (popup) with more information
       marker.callout = {
         calloutElementForAnnotation: (annotation: any) => {
-          const calloutElement = document.createElement("div");
-          calloutElement.className = "mapkit-callout";
-
-          // Apply Apple-style CSS
-          calloutElement.style.padding = "16px";
-          calloutElement.style.maxWidth = "280px";
-          calloutElement.style.backgroundColor = "white";
-          calloutElement.style.borderRadius = "14px";
-          calloutElement.style.boxShadow = "0 4px 16px rgba(0, 0, 0, 0.12)";
-          calloutElement.style.border = "none";
-          calloutElement.style.fontFamily =
-            "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
-
           const location = Object.values(locations).find(
             (loc) => loc.id === annotation.locationId,
           );
-          if (!location) return calloutElement;
-
-          // Create Apple-style callout content
-          calloutElement.innerHTML = `
-                <h3 style="font-weight: 600; font-size: 17px; margin-bottom: 6px; color: #000;">${location.name}</h3>
-                ${location.description ? `<p style="font-size: 15px; margin-bottom: 8px; color: #333;">${location.description}</p>` : ""}
-                <div style="display: flex; flex-direction: column; gap: 4px;">
-                  <div style="display: flex; items-center;">
-                    <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background-color: ${categories[location.category]?.color || appleColors.gray.dark}; margin-right: 6px;"></span>
-                    <span style="font-size: 13px; color: #8E8E93;">${categories[location.category]?.name || "Uncategorized"}</span>
-                  </div>
-                  <p style="font-size: 13px; color: #8E8E93; margin-top: 4px;">
-                    Added by: ${activeProfileId === location.addedBy ? "You" : userNames[location.addedBy] || "Anonymous"}
-                  </p>
-                </div>
-          `;
-
-          // Add event listeners for buttons with hover effects
-          setTimeout(() => {
-            const infoButton = document.getElementById(`info-${location.id}`);
-            if (infoButton) {
-              infoButton.addEventListener("mouseover", () => {
-                infoButton.style.backgroundColor = "rgba(0, 122, 255, 0.1)";
-              });
-              infoButton.addEventListener("mouseout", () => {
-                infoButton.style.backgroundColor = "transparent";
-              });
-              infoButton.addEventListener("click", () => {
-                setSelectedLocation(location.id);
+          if (!location) return document.createElement("div");
+          
+          // Use the extracted callout creator function
+          return createMapPinCallout(
+            location, 
+            userNames, 
+            activeProfileId, 
+            {
+              blue: appleColors.blue,
+              green: appleColors.green,
+              yellow: appleColors.yellow,
+              orange: "#FF9500", // Orange from Apple palette
+              purple: "#AF52DE", // Purple from Apple palette
+            },
+            {
+              onDetailsClick: (locationId) => {
+                setSelectedLocation(locationId);
                 setShowReviewPanel(false);
 
                 // Fetch business hours when location is selected
                 if (location.placeId) {
                   setIsLoadingHours(true);
                   setBusinessHours(null);
-                  fetchAndUpdateBusinessHours(location.id)
+                  fetchAndUpdateBusinessHours(locationId)
                     .then((hours) => {
                       setBusinessHours(hours);
                       setIsLoadingHours(false);
@@ -535,64 +609,44 @@ const MapView: React.FC = () => {
                       setIsLoadingHours(false);
                     });
                 }
-              });
-            }
-
-            const reviewButton = document.getElementById(
-              `review-${location.id}`,
-            );
-            if (reviewButton) {
-              reviewButton.addEventListener("mouseover", () => {
-                reviewButton.style.backgroundColor = "rgba(255, 149, 0, 0.1)";
-              });
-              reviewButton.addEventListener("mouseout", () => {
-                reviewButton.style.backgroundColor = "transparent";
-              });
-              reviewButton.addEventListener("click", () => {
-                setSelectedLocation(location.id);
+              },
+              onReviewClick: (locationId) => {
+                setSelectedLocation(locationId);
                 setShowReviewPanel(true);
                 setReviewRating(5);
                 setReviewComment("");
-              });
+              }
             }
-
-            const removeButton = document.getElementById(
-              `remove-${location.id}`,
-            );
-            if (removeButton) {
-              removeButton.addEventListener("mouseover", () => {
-                removeButton.style.backgroundColor = "rgba(255, 59, 48, 0.1)";
-              });
-              removeButton.addEventListener("mouseout", () => {
-                removeButton.style.backgroundColor = "transparent";
-              });
-              removeButton.addEventListener("click", () => {
-                mapInstanceRef.current.removeAnnotation(annotation);
-                markersRef.current = markersRef.current.filter(
-                  (m) => m !== annotation,
-                );
-              });
-            }
-          }, 0);
-
-          return calloutElement;
+          );
         },
       };
+      
+      // Add event handling to ensure only one popup is shown at a time
+      const originalHandleEvent = marker.handleEvent;
+      marker.handleEvent = (event: any) => {
+        if (event.type === 'select') {
+          // Handle marker selection and ensure only one popup is visible
+          if (pinManagerRef.current) {
+            pinManagerRef.current.handleMarkerSelect(marker);
+          }
+        }
+        return originalHandleEvent.call(marker, event);
+      };
 
-      return marker;
+      newMarkers.push(marker);
     });
 
-    // Add all markers to the map
-    if (markers.length > 0) {
-      mapInstanceRef.current.addAnnotations(markers);
-      markersRef.current = [...markersRef.current, ...markers];
-    }
+    // Use pin manager to add markers with clustering
+    pinManagerRef.current.addMarkers(newMarkers);
+    
+    // Update reference to all markers
+    markersRef.current = newMarkers;
   };
 
-  // Update markers when locations change
+  // Update markers when filtered locations change
   useEffect(() => {
     updateMapMarkers();
-  }, [locations, mapIsReady]);
+  }, [filteredLocations, mapIsReady]);
 
   // Update all locations' open status when component mounts
   useEffect(() => {
@@ -613,42 +667,34 @@ const MapView: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (addingType === 'location') {
-      if (newLocation.name.trim() === "" || newLocation.latitude === 0) return;
-      addLocation(newLocation);
-    } else {
-      if (newCommunity.name.trim() === "" || newCommunity.latitude === 0) return;
-      // Prepare community data in the format expected by addLocation
-      const communityLocation = {
-        name: newCommunity.name,
-        description: newCommunity.description,
-        latitude: newCommunity.latitude,
-        longitude: newCommunity.longitude,
-        placeId: newCommunity.placeId,
-        category: newCommunity.category,
-        tags: [...newCommunity.tags, "community", newCommunity.gameType],
-        // Add community data in metadata or description
-        communityData: {
-          gameType: newCommunity.gameType,
-          playersNeeded: newCommunity.playersNeeded,
-          experienceLevel: newCommunity.experienceLevel,
-          schedule: newCommunity.schedule,
-          contactInfo: newCommunity.contactInfo
-        }
-      };
-      addLocation(communityLocation);
-    }
+    if (newCommunity.name.trim() === "" || newCommunity.latitude === 0 || !newCommunity.gameType.trim()) return;
     
+    // Prepare community data with enhanced structure
+    const communityLocation = {
+      name: newCommunity.name,
+      description: newCommunity.description,
+      latitude: newCommunity.latitude,
+      longitude: newCommunity.longitude,
+      placeId: newCommunity.placeId,
+      category: newCommunity.category,
+      gameType: newCommunity.gameType,
+      tags: [...newCommunity.tags, "community", newCommunity.gameType],
+      communityData: {
+        genre: newCommunity.genre,
+        gameType: newCommunity.gameType,
+        playerRoles: newCommunity.playerRoles,
+        playersNeeded: newCommunity.playersNeeded,
+        experienceLevel: newCommunity.experienceLevel,
+        schedule: newCommunity.schedule,
+        contactInfo: newCommunity.contactInfo,
+        createdAt: Date.now()
+      }
+    };
+    
+    addLocation(communityLocation);
+    
+    // Reset state and form
     setIsAddingLocation(false);
-    setNewLocation({
-      name: "",
-      description: "",
-      latitude: 0,
-      longitude: 0,
-      placeId: "",
-      category: "free",
-      tags: [] as string[]
-    });
     setNewCommunity({
       name: "",
       description: "",
@@ -658,9 +704,15 @@ const MapView: React.FC = () => {
       category: "free",
       tags: [] as string[],
       gameType: "",
+      genre: "",
+      playerRoles: [] as string[],
       playersNeeded: 1,
       experienceLevel: "all",
-      schedule: "",
+      schedule: {
+        days: [] as string[],
+        time: "",
+        frequency: ""
+      },
       contactInfo: ""
     });
 
@@ -673,21 +725,12 @@ const MapView: React.FC = () => {
       }
     }
 
-    // Update markers to include the new location
+    // Update markers
     updateMapMarkers();
   };
 
   const cancelAddLocation = () => {
     setIsAddingLocation(false);
-    setNewLocation({
-      name: "",
-      description: "",
-      latitude: 0,
-      longitude: 0,
-      placeId: "",
-      category: "free",
-      tags: [] as string[]
-    });
     setNewCommunity({
       name: "",
       description: "",
@@ -697,9 +740,15 @@ const MapView: React.FC = () => {
       category: "free",
       tags: [] as string[],
       gameType: "",
+      genre: "",
+      playerRoles: [] as string[],
       playersNeeded: 1,
       experienceLevel: "all",
-      schedule: "",
+      schedule: {
+        days: [] as string[],
+        time: "",
+        frequency: ""
+      },
       contactInfo: ""
     });
 
@@ -739,6 +788,22 @@ const MapView: React.FC = () => {
       delete window.showAuthScreen;
     };
   }, []);
+
+  // Handle filter changes
+  const handleFilterChange = (filters: FilterOptions) => {
+    setActiveFilters(filters);
+  };
+
+  // Check if current user is admin - add this function
+  const isCurrentUserAdmin = () => {
+    // Simple check for admin based on user name
+    if (!activeProfileId) return false;
+    
+    const isAdminByName = activeProfile?.name?.toLowerCase() === 'admin';
+    const isAdminByFlag = activeProfile?.isAdmin === true;
+    
+    return isAdminByName || isAdminByFlag;
+  };
 
   return (
     <div className="flex flex-col h-full relative">
@@ -849,10 +914,7 @@ const MapView: React.FC = () => {
                 <UserSelector />
                 <OtherUsersList />
                 <GameFilters 
-                  onFilterChange={(filters) => {
-                    console.log("Filters changed:", filters);
-                    // Implement filter logic here
-                  }}
+                  onFilterChange={handleFilterChange}
                 />
                 <ResetDataButton />
               </>
@@ -872,12 +934,8 @@ const MapView: React.FC = () => {
                   </button>
                 </div>
 
-                {/* Always show game filters for all users */}
                 <GameFilters 
-                  onFilterChange={(filters) => {
-                    console.log("Filters changed:", filters);
-                    // Implement filter logic here
-                  }}
+                  onFilterChange={handleFilterChange}
                 />
               </>
             )}
@@ -909,952 +967,48 @@ const MapView: React.FC = () => {
             </div>
           </div>
 
-          {/* Location Details Panel */}
-          {selectedLocation && !showReviewPanel && (
-            <div
-              className="absolute inset-x-0 bottom-0 bg-white rounded-t-xl shadow-lg z-[10000] transition-transform transform translate-y-0 max-h-[80vh] md:max-h-[60%] flex flex-col"
-              style={{
-                backgroundColor: "rgba(255, 255, 255, 0.95)",
-                backdropFilter: "blur(10px)",
-                WebkitBackdropFilter: "blur(10px)",
-                borderTopLeftRadius: "16px",
-                borderTopRightRadius: "16px",
-                boxShadow: "0 -2px 20px rgba(0, 0, 0, 0.1)",
+          {/* Location Details Panel - Replaced with new component */}
+          {selectedLocation && (
+            <LocationDetailPanel
+              selectedLocation={selectedLocation}
+              setSelectedLocation={setSelectedLocation}
+              locations={locations}
+              userNames={userNames}
+              activeProfileId={activeProfileId}
+              addReview={addReview}
+              removeReview={removeReview}
+              businessHours={businessHours}
+              isLoadingHours={isLoadingHours}
+              fetchAndUpdateBusinessHours={(locationId) => {
+                setIsLoadingHours(true);
+                setBusinessHours(null);
+                return fetchAndUpdateBusinessHours(locationId)
+                  .then((hours) => {
+                    setBusinessHours(hours);
+                    setIsLoadingHours(false);
+                    return hours;
+                  })
+                  .catch((error) => {
+                    console.error("Error fetching business hours:", error);
+                    setIsLoadingHours(false);
+                    throw error;
+                  });
               }}
-            >
-              {/* Apple-style header */}
-              <div
-                className="p-4 flex items-center justify-between"
-                style={{ borderBottom: "1px solid rgba(0, 0, 0, 0.1)" }}
-              >
-                <button
-                  onClick={() => {
-                    setSelectedLocation(null);
-                    setBusinessHours(null);
-                  }}
-                  className="text-sm font-medium px-3 py-1 rounded-full"
-                  style={{ color: appleColors.blue }}
-                >
-                  Close
-                </button>
-                <h3
-                  className="font-semibold text-base md:text-lg"
-                  style={{
-                    fontFamily:
-                      '-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
-                  }}
-                >
-                  Location Details
-                </h3>
-                <button
-                  onClick={() => setShowReviewPanel(true)}
-                  className="text-sm font-medium px-3 py-1 rounded-full"
-                  style={{ color: appleColors.blue }}
-                >
-                  Add Review
-                </button>
-              </div>
-
-              {/* Location Details */}
-              <div className="p-4 overflow-y-auto">
-                {locations[selectedLocation] && (
-                  <div className="flex flex-col gap-4">
-                    <div>
-                      <h2 className="text-xl font-semibold mb-2">
-                        {locations[selectedLocation].name}
-                      </h2>
-                      {locations[selectedLocation].description && (
-                        <p className="text-gray-700 mb-4">
-                          {locations[selectedLocation].description}
-                        </p>
-                      )}
-
-                      {/* Category */}
-                      {locations[selectedLocation].category &&
-                        categories[locations[selectedLocation].category] && (
-                          <div className="flex items-center gap-2 mb-4">
-                            <span
-                              className="w-3 h-3 rounded-full"
-                              style={{
-                                backgroundColor:
-                                  categories[
-                                    locations[selectedLocation].category
-                                  ].color,
-                              }}
-                            ></span>
-                            <span className="text-sm text-gray-600">
-                              {
-                                categories[locations[selectedLocation].category]
-                                  .name
-                              }
-                            </span>
-                          </div>
-                        )}
-
-                      {/* Added by */}
-                      <div className="text-sm text-gray-600 mb-4">
-                        Added by:{" "}
-                        {activeProfileId === locations[selectedLocation].addedBy
-                          ? "You"
-                          : userNames[locations[selectedLocation].addedBy] ||
-                            "Anonymous"}
-                      </div>
-
-                      {/* Coordinates */}
-                      <div className="text-sm text-gray-600 mb-4">
-                        Coordinates:{" "}
-                        {locations[selectedLocation].latitude.toFixed(6)},{" "}
-                        {locations[selectedLocation].longitude.toFixed(6)}
-                      </div>
-
-                      {/* Business Hours Section */}
-                      {locations[selectedLocation].placeId && (
-                        <div className="mb-4">
-                          <h3 className="text-md font-semibold mb-2 flex items-center gap-2">
-                            <Clock className="h-4 w-4" />
-                            Business Hours
-                          </h3>
-
-                          {isLoadingHours ? (
-                            <div className="flex items-center gap-2 text-gray-500">
-                              <div className="animate-spin h-4 w-4 border-2 border-blue-500 rounded-full border-t-transparent"></div>
-                              <span>Loading hours...</span>
-                            </div>
-                          ) : businessHours ? (
-                            <div>
-                              <div className="text-sm mb-2">
-                                <span
-                                  className={`font-medium ${businessHours.isOpen ? "text-green-600" : "text-red-600"}`}
-                                >
-                                  {businessHours.isOpen
-                                    ? "Open now"
-                                    : "Closed now"}
-                                </span>
-                              </div>
-                              <div className="text-sm text-gray-600 space-y-1">
-                                {businessHours.weekdayText.map((day, index) => (
-                                  <div
-                                    key={index}
-                                    className="flex justify-between"
-                                  >
-                                    <span>{day.split(": ")[0]}</span>
-                                    <span>{day.split(": ")[1]}</span>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          ) : (
-                            <div className="text-sm text-gray-500">
-                              No business hours available
-                            </div>
-                          )}
-                        </div>
-                      )}
-
-                      {/* Reviews Section */}
-                      <div className="mt-6">
-                        <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-                          <MessageSquare className="h-5 w-5" />
-                          Reviews
-                        </h3>
-
-                        {!locations[selectedLocation].reviews ||
-                        locations[selectedLocation].reviews.length === 0 ? (
-                          <div className="text-gray-500 text-sm">
-                            No reviews yet. Be the first to add a review!
-                          </div>
-                        ) : (
-                          <div className="space-y-4">
-                            {locations[selectedLocation].reviews?.map(
-                              (review) => {
-                                const reviewer =
-                                  userNames[review.userId] || "Anonymous";
-                                const isCurrentUser =
-                                  review.userId === activeProfileId;
-
-                                return (
-                                  <div
-                                    key={review.id}
-                                    className="p-4 rounded-lg"
-                                    style={{
-                                      backgroundColor: "rgba(0, 0, 0, 0.03)",
-                                    }}
-                                  >
-                                    <div className="flex justify-between items-start">
-                                      <div className="flex items-center gap-2 mb-2">
-                                        <div className="flex">
-                                          {[...Array(5)].map((_, i) => (
-                                            <Star
-                                              key={i}
-                                              className="h-4 w-4"
-                                              fill={
-                                                i < review.rating
-                                                  ? appleColors.yellow
-                                                  : "none"
-                                              }
-                                              stroke={
-                                                i < review.rating
-                                                  ? appleColors.yellow
-                                                  : appleColors.gray.dark
-                                              }
-                                            />
-                                          ))}
-                                        </div>
-                                        <span className="text-sm font-medium">
-                                          {isCurrentUser ? "You" : reviewer}
-                                        </span>
-                                      </div>
-
-                                      {isCurrentUser && (
-                                        <button
-                                          onClick={() =>
-                                            removeReview(
-                                              selectedLocation,
-                                              review.id,
-                                            )
-                                          }
-                                          className="text-xs text-red-500"
-                                        >
-                                          Delete
-                                        </button>
-                                      )}
-                                    </div>
-
-                                    <p className="text-sm text-gray-700">
-                                      {review.comment}
-                                    </p>
-
-                                    <div className="text-xs text-gray-500 mt-2">
-                                      {new Date(
-                                        review.createdAt,
-                                      ).toLocaleDateString()}
-                                    </div>
-                                  </div>
-                                );
-                              },
-                            )}
-                          </div>
-                        )}
-
-                        <button
-                          onClick={() => setShowReviewPanel(true)}
-                          className="mt-4 w-full py-2 rounded-lg font-medium text-sm"
-                          style={{
-                            backgroundColor: appleColors.blue,
-                            color: "white",
-                          }}
-                        >
-                          Add Your Review
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
+              categories={categories}
+              appleColors={appleColors}
+              deleteLocation={deleteLocation}
+            />
           )}
 
-          {/* Review Form Panel */}
-          {selectedLocation && showReviewPanel && (
-            <div
-              className="absolute inset-x-0 bottom-0 bg-white rounded-t-xl shadow-lg z-[10000] transition-transform transform translate-y-0 max-h-[80vh] md:max-h-[60%] flex flex-col"
-              style={{
-                backgroundColor: "rgba(255, 255, 255, 0.95)",
-                backdropFilter: "blur(10px)",
-                WebkitBackdropFilter: "blur(10px)",
-                borderTopLeftRadius: "16px",
-                borderTopRightRadius: "16px",
-                boxShadow: "0 -2px 20px rgba(0, 0, 0, 0.1)",
-              }}
-            >
-              {/* Apple-style header */}
-              <div
-                className="p-4 flex items-center justify-between"
-                style={{ borderBottom: "1px solid rgba(0, 0, 0, 0.1)" }}
-              >
-                <button
-                  onClick={() => setShowReviewPanel(false)}
-                  className="text-sm font-medium px-3 py-1 rounded-full"
-                  style={{ color: appleColors.blue }}
-                >
-                  Back
-                </button>
-                <h3
-                  className="font-semibold text-base md:text-lg"
-                  style={{
-                    fontFamily:
-                      '-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
-                  }}
-                >
-                  Add Review
-                </h3>
-                <button
-                  onClick={() => {
-                    if (reviewComment.trim()) {
-                      addReview(selectedLocation, reviewRating, reviewComment);
-                      setShowReviewPanel(false);
-                    }
-                  }}
-                  disabled={!reviewComment.trim()}
-                  className="text-sm font-medium px-3 py-1 rounded-full"
-                  style={{
-                    color: reviewComment.trim()
-                      ? appleColors.blue
-                      : appleColors.gray.dark,
-                    opacity: reviewComment.trim() ? 1 : 0.5,
-                  }}
-                >
-                  Submit
-                </button>
-              </div>
-
-              {/* Review Form */}
-              <div className="p-4 overflow-y-auto">
-                {locations[selectedLocation] && (
-                  <div className="flex flex-col gap-4">
-                    <h2 className="text-lg font-medium mb-2">
-                      {locations[selectedLocation].name}
-                    </h2>
-
-                    {/* Rating */}
-                    <div>
-                      <label className="block text-sm font-medium mb-2 text-gray-700">
-                        Your Rating
-                      </label>
-                      <div className="flex gap-2">
-                        {[1, 2, 3, 4, 5].map((rating) => (
-                          <button
-                            key={rating}
-                            type="button"
-                            onClick={() => setReviewRating(rating)}
-                            className="p-2"
-                          >
-                            <Star
-                              className="h-8 w-8"
-                              fill={
-                                rating <= reviewRating
-                                  ? appleColors.yellow
-                                  : "none"
-                              }
-                              stroke={
-                                rating <= reviewRating
-                                  ? appleColors.yellow
-                                  : appleColors.gray.dark
-                              }
-                            />
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Review Comment */}
-                    <div>
-                      <label
-                        htmlFor="review-comment"
-                        className="block text-sm font-medium mb-2 text-gray-700"
-                      >
-                        Your Review
-                      </label>
-                      <textarea
-                        id="review-comment"
-                        rows={5}
-                        placeholder="Share your experience with this place..."
-                        className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2"
-                        style={{
-                          borderColor: appleColors.gray.medium,
-                          borderRadius: "10px",
-                          fontSize: "16px",
-                          resize: "none",
-                        }}
-                        value={reviewComment}
-                        onChange={(e) => setReviewComment(e.target.value)}
-                      />
-                    </div>
-
-                    <button
-                      onClick={() => {
-                        if (reviewComment.trim()) {
-                          addReview(
-                            selectedLocation,
-                            reviewRating,
-                            reviewComment,
-                          );
-                          setShowReviewPanel(false);
-                        }
-                      }}
-                      disabled={!reviewComment.trim()}
-                      className="mt-4 w-full py-3 rounded-lg font-medium"
-                      style={{
-                        backgroundColor: reviewComment.trim()
-                          ? appleColors.blue
-                          : appleColors.gray.light,
-                        color: reviewComment.trim()
-                          ? "white"
-                          : appleColors.gray.dark,
-                        opacity: reviewComment.trim() ? 1 : 0.7,
-                      }}
-                    >
-                      Submit Review
-                    </button>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-
-          {/* Apple-style Add Location/Community Panel */}
+          {/* Community Form Panel */}
           {isAddingLocation && (
-            <div
-              className="absolute inset-x-0 bottom-0 bg-white rounded-t-xl shadow-lg z-[10000] transition-transform transform translate-y-0 max-h-[80vh] md:max-h-[60%] flex flex-col"
-              style={{
-                backgroundColor: "rgba(255, 255, 255, 0.95)",
-                backdropFilter: "blur(10px)",
-                WebkitBackdropFilter: "blur(10px)",
-                borderTopLeftRadius: "16px",
-                borderTopRightRadius: "16px",
-                boxShadow: "0 -2px 20px rgba(0, 0, 0, 0.1)",
-              }}
-            >
-              {/* Apple-style header */}
-              <div
-                className="p-4 flex items-center justify-between"
-                style={{ borderBottom: "1px solid rgba(0, 0, 0, 0.1)" }}
-              >
-                <button
-                  onClick={cancelAddLocation}
-                  className="text-sm font-medium px-3 py-1 rounded-full"
-                  style={{ color: appleColors.blue }}
-                >
-                  Cancel
-                </button>
-                <h3
-                  className="font-semibold text-base md:text-lg"
-                  style={{
-                    fontFamily:
-                      '-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
-                  }}
-                >
-                  {addingType === 'location' ? 'Add Location' : 'Add Game Community'}
-                </h3>
-                <button
-                  type="button"
-                  onClick={handleSubmit}
-                  disabled={
-                    addingType === 'location' 
-                      ? (newLocation.latitude === 0 || !newLocation.name.trim())
-                      : (newCommunity.latitude === 0 || !newCommunity.name.trim() || !newCommunity.gameType.trim())
-                  }
-                  className="text-sm font-medium px-3 py-1 rounded-full"
-                  style={{
-                    color:
-                      (addingType === 'location' 
-                        ? (newLocation.latitude === 0 || !newLocation.name.trim()) 
-                        : (newCommunity.latitude === 0 || !newCommunity.name.trim() || !newCommunity.gameType.trim()))
-                        ? appleColors.gray.dark
-                        : appleColors.blue,
-                    opacity:
-                      (addingType === 'location' 
-                        ? (newLocation.latitude === 0 || !newLocation.name.trim())
-                        : (newCommunity.latitude === 0 || !newCommunity.name.trim() || !newCommunity.gameType.trim()))
-                        ? 0.5
-                        : 1,
-                  }}
-                >
-                  Add
-                </button>
-              </div>
-
-              {/* Form - Apple style */}
-              <div className="p-4 overflow-y-auto">
-                {/* Location/Community toggle */}
-                <div className="mb-4">
-                  <Tabs defaultValue={addingType} className="w-full" onValueChange={(value) => setAddingType(value as 'location'|'community')}>
-                    <TabsList className="grid w-full grid-cols-2 mb-4">
-                      <TabsTrigger value="location" className="flex items-center justify-center gap-2">
-                        <MapPin className="h-4 w-4" />
-                        <span>Location</span>
-                      </TabsTrigger>
-                      <TabsTrigger value="community" className="flex items-center justify-center gap-2">
-                        <Gamepad2 className="h-4 w-4" />
-                        <span>Game Community</span>
-                      </TabsTrigger>
-                    </TabsList>
-                    
-                    <TabsContent value="location">
-                      <form className="flex flex-col gap-4">
-                        <div>
-                          <label
-                            htmlFor="location-name"
-                            className="block text-sm font-medium mb-1"
-                            style={{ color: appleColors.text.secondary }}
-                          >
-                            Name
-                          </label>
-                          <input
-                            id="location-name"
-                            type="text"
-                            placeholder="Enter a name for this location"
-                            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2"
-                            style={{
-                              borderColor: appleColors.gray.medium,
-                              borderRadius: "10px",
-                              fontSize: "16px",
-                            }}
-                            value={newLocation.name}
-                            onChange={(e) =>
-                              setNewLocation((prev) => ({
-                                ...prev,
-                                name: e.target.value,
-                              }))
-                            }
-                            required
-                          />
-                        </div>
-
-                        <div>
-                          <label
-                            htmlFor="location-description"
-                            className="block text-sm font-medium mb-1"
-                            style={{ color: appleColors.text.secondary }}
-                          >
-                            Description (optional)
-                          </label>
-                          <textarea
-                            id="location-description"
-                            rows={3}
-                            placeholder="Description"
-                            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2"
-                            style={{
-                              borderColor: appleColors.gray.medium,
-                              borderRadius: "10px",
-                              fontSize: "16px",
-                              resize: "none",
-                            }}
-                            value={newLocation.description}
-                            onChange={(e) =>
-                              setNewLocation((prev) => ({
-                                ...prev,
-                                description: e.target.value,
-                              }))
-                            }
-                          />
-                        </div>
-
-                        <div>
-                          <label
-                            htmlFor="location-tags"
-                            className="block text-sm font-medium mb-1"
-                            style={{ color: appleColors.text.secondary }}
-                          >
-                            Tags
-                          </label>
-                          <div className="flex flex-wrap gap-2 mb-2">
-                            {newLocation.tags.map((tag, index) => (
-                              <span
-                                key={index}
-                                className="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm"
-                                style={{
-                                  backgroundColor: "rgba(0, 122, 255, 0.1)",
-                                  color: appleColors.blue
-                                }}
-                              >
-                                {tag}
-                                <button
-                                  type="button"
-                                  className="ml-1 hover:text-red-500"
-                                  onClick={() => setNewLocation(prev => ({
-                                    ...prev,
-                                    tags: prev.tags.filter((_, i) => i !== index)
-                                  }))}
-                                >
-                                  ×
-                                </button>
-                              </span>
-                            ))}
-                          </div>
-                          <div className="flex gap-2">
-                            <input
-                              id="location-tags"
-                              type="text"
-                              placeholder="Add tags (press Enter)"
-                              className="flex-1 px-4 py-3 border rounded-lg focus:outline-none focus:ring-2"
-                              style={{
-                                borderColor: appleColors.gray.medium,
-                                borderRadius: "10px",
-                                fontSize: "16px",
-                              }}
-                              value={tagInput}
-                              onChange={(e) => setTagInput(e.target.value)}
-                              onKeyDown={(e) => {
-                                if (e.key === 'Enter' && tagInput.trim()) {
-                                  e.preventDefault();
-                                  setNewLocation(prev => ({
-                                    ...prev,
-                                    tags: [...new Set([...prev.tags, tagInput.trim()])]
-                                  }));
-                                  setTagInput('');
-                                }
-                              }}
-                            />
-                            <button
-                              type="button"
-                              onClick={() => {
-                                if (tagInput.trim()) {
-                                  setNewLocation(prev => ({
-                                    ...prev,
-                                    tags: [...new Set([...prev.tags, tagInput.trim()])]
-                                  }));
-                                  setTagInput('');
-                                }
-                              }}
-                              className="px-4 py-3 rounded-lg"
-                              style={{
-                                backgroundColor: tagInput.trim() ? appleColors.blue : appleColors.gray.light,
-                                color: tagInput.trim() ? "white" : appleColors.gray.dark,
-                                opacity: tagInput.trim() ? 1 : 0.5,
-                              }}
-                            >
-                              Add
-                            </button>
-                          </div>
-                        </div>
-
-                        {newLocation.latitude !== 0 && (
-                          <div
-                            className="p-3 rounded-lg flex items-center gap-2 text-sm"
-                            style={{
-                              backgroundColor: "rgba(0, 122, 255, 0.1)",
-                              borderRadius: "10px",
-                            }}
-                          >
-                            <MapPin
-                              className="h-4 w-4"
-                              style={{ color: appleColors.blue }}
-                            />
-                            <span style={{ color: appleColors.text.primary }}>
-                              Location selected. Tap on map to adjust.
-                            </span>
-                          </div>
-                        )}
-                      </form>
-                    </TabsContent>
-                    
-                    <TabsContent value="community">
-                      <form className="flex flex-col gap-4">
-                        <div>
-                          <label
-                            htmlFor="community-name"
-                            className="block text-sm font-medium mb-1"
-                            style={{ color: appleColors.text.secondary }}
-                          >
-                            Community Name
-                          </label>
-                          <input
-                            id="community-name"
-                            type="text"
-                            placeholder="Enter a name for your game community"
-                            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2"
-                            style={{
-                              borderColor: appleColors.gray.medium,
-                              borderRadius: "10px",
-                              fontSize: "16px",
-                            }}
-                            value={newCommunity.name}
-                            onChange={(e) =>
-                              setNewCommunity((prev) => ({
-                                ...prev,
-                                name: e.target.value,
-                              }))
-                            }
-                            required
-                          />
-                        </div>
-
-                        <div>
-                          <label
-                            htmlFor="community-game-type"
-                            className="block text-sm font-medium mb-1"
-                            style={{ color: appleColors.text.secondary }}
-                          >
-                            Game Type
-                          </label>
-                          <select
-                            id="community-game-type"
-                            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2"
-                            style={{
-                              borderColor: appleColors.gray.medium,
-                              borderRadius: "10px",
-                              fontSize: "16px",
-                            }}
-                            value={newCommunity.gameType}
-                            onChange={(e) =>
-                              setNewCommunity((prev) => ({
-                                ...prev,
-                                gameType: e.target.value,
-                              }))
-                            }
-                            required
-                          >
-                            <option value="">Select a game type</option>
-                            <option value="DnD">Dungeons & Dragons</option>
-                            <option value="Pathfinder">Pathfinder</option>
-                            <option value="CoC">Call of Cthulhu</option>
-                            <option value="LARP">LARP</option>
-                            <option value="BoardGames">Board Games</option>
-                            <option value="CardGames">Card Games</option>
-                            <option value="VideoGames">Video Games</option>
-                            <option value="Other">Other</option>
-                          </select>
-                        </div>
-
-                        <div>
-                          <label
-                            htmlFor="community-description"
-                            className="block text-sm font-medium mb-1"
-                            style={{ color: appleColors.text.secondary }}
-                          >
-                            Description
-                          </label>
-                          <textarea
-                            id="community-description"
-                            rows={3}
-                            placeholder="Describe your community, game style, etc."
-                            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2"
-                            style={{
-                              borderColor: appleColors.gray.medium,
-                              borderRadius: "10px",
-                              fontSize: "16px",
-                              resize: "none",
-                            }}
-                            value={newCommunity.description}
-                            onChange={(e) =>
-                              setNewCommunity((prev) => ({
-                                ...prev,
-                                description: e.target.value,
-                              }))
-                            }
-                          />
-                        </div>
-
-                        <div>
-                          <label
-                            htmlFor="players-needed"
-                            className="block text-sm font-medium mb-1"
-                            style={{ color: appleColors.text.secondary }}
-                          >
-                            Players Needed
-                          </label>
-                          <input
-                            id="players-needed"
-                            type="number"
-                            min="1"
-                            max="20"
-                            placeholder="Number of players needed"
-                            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2"
-                            style={{
-                              borderColor: appleColors.gray.medium,
-                              borderRadius: "10px",
-                              fontSize: "16px",
-                            }}
-                            value={newCommunity.playersNeeded}
-                            onChange={(e) =>
-                              setNewCommunity((prev) => ({
-                                ...prev,
-                                playersNeeded: parseInt(e.target.value) || 1,
-                              }))
-                            }
-                          />
-                        </div>
-
-                        <div>
-                          <label
-                            htmlFor="experience-level"
-                            className="block text-sm font-medium mb-1"
-                            style={{ color: appleColors.text.secondary }}
-                          >
-                            Experience Level
-                          </label>
-                          <select
-                            id="experience-level"
-                            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2"
-                            style={{
-                              borderColor: appleColors.gray.medium,
-                              borderRadius: "10px",
-                              fontSize: "16px",
-                            }}
-                            value={newCommunity.experienceLevel}
-                            onChange={(e) =>
-                              setNewCommunity((prev) => ({
-                                ...prev,
-                                experienceLevel: e.target.value,
-                              }))
-                            }
-                          >
-                            <option value="all">All Experience Levels</option>
-                            <option value="beginner">Beginners Welcome</option>
-                            <option value="intermediate">Intermediate Players</option>
-                            <option value="experienced">Experienced Players Only</option>
-                          </select>
-                        </div>
-
-                        <div>
-                          <label
-                            htmlFor="community-schedule"
-                            className="block text-sm font-medium mb-1"
-                            style={{ color: appleColors.text.secondary }}
-                          >
-                            Schedule
-                          </label>
-                          <input
-                            id="community-schedule"
-                            type="text"
-                            placeholder="When do you play? (e.g., 'Fridays 7PM')"
-                            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2"
-                            style={{
-                              borderColor: appleColors.gray.medium,
-                              borderRadius: "10px",
-                              fontSize: "16px",
-                            }}
-                            value={newCommunity.schedule}
-                            onChange={(e) =>
-                              setNewCommunity((prev) => ({
-                                ...prev,
-                                schedule: e.target.value,
-                              }))
-                            }
-                          />
-                        </div>
-
-                        <div>
-                          <label
-                            htmlFor="contact-info"
-                            className="block text-sm font-medium mb-1"
-                            style={{ color: appleColors.text.secondary }}
-                          >
-                            Contact Information
-                          </label>
-                          <input
-                            id="contact-info"
-                            type="text"
-                            placeholder="How can interested players reach you?"
-                            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2"
-                            style={{
-                              borderColor: appleColors.gray.medium,
-                              borderRadius: "10px",
-                              fontSize: "16px",
-                            }}
-                            value={newCommunity.contactInfo}
-                            onChange={(e) =>
-                              setNewCommunity((prev) => ({
-                                ...prev,
-                                contactInfo: e.target.value,
-                              }))
-                            }
-                          />
-                        </div>
-
-                        <div>
-                          <label
-                            htmlFor="community-tags"
-                            className="block text-sm font-medium mb-1"
-                            style={{ color: appleColors.text.secondary }}
-                          >
-                            Tags
-                          </label>
-                          <div className="flex flex-wrap gap-2 mb-2">
-                            {newCommunity.tags.map((tag, index) => (
-                              <span
-                                key={index}
-                                className="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm"
-                                style={{
-                                  backgroundColor: "rgba(0, 122, 255, 0.1)",
-                                  color: appleColors.blue
-                                }}
-                              >
-                                {tag}
-                                <button
-                                  type="button"
-                                  className="ml-1 hover:text-red-500"
-                                  onClick={() => setNewCommunity(prev => ({
-                                    ...prev,
-                                    tags: prev.tags.filter((_, i) => i !== index)
-                                  }))}
-                                >
-                                  ×
-                                </button>
-                              </span>
-                            ))}
-                          </div>
-                          <div className="flex gap-2">
-                            <input
-                              id="community-tags"
-                              type="text"
-                              placeholder="Add tags (press Enter)"
-                              className="flex-1 px-4 py-3 border rounded-lg focus:outline-none focus:ring-2"
-                              style={{
-                                borderColor: appleColors.gray.medium,
-                                borderRadius: "10px",
-                                fontSize: "16px",
-                              }}
-                              value={tagInput}
-                              onChange={(e) => setTagInput(e.target.value)}
-                              onKeyDown={(e) => {
-                                if (e.key === 'Enter' && tagInput.trim()) {
-                                  e.preventDefault();
-                                  setNewCommunity(prev => ({
-                                    ...prev,
-                                    tags: [...new Set([...prev.tags, tagInput.trim()])]
-                                  }));
-                                  setTagInput('');
-                                }
-                              }}
-                            />
-                            <button
-                              type="button"
-                              onClick={() => {
-                                if (tagInput.trim()) {
-                                  setNewCommunity(prev => ({
-                                    ...prev,
-                                    tags: [...new Set([...prev.tags, tagInput.trim()])]
-                                  }));
-                                  setTagInput('');
-                                }
-                              }}
-                              className="px-4 py-3 rounded-lg"
-                              style={{
-                                backgroundColor: tagInput.trim() ? appleColors.blue : appleColors.gray.light,
-                                color: tagInput.trim() ? "white" : appleColors.gray.dark,
-                                opacity: tagInput.trim() ? 1 : 0.5,
-                              }}
-                            >
-                              Add
-                            </button>
-                          </div>
-                        </div>
-
-                        {newCommunity.latitude !== 0 && (
-                          <div
-                            className="p-3 rounded-lg flex items-center gap-2 text-sm"
-                            style={{
-                              backgroundColor: "rgba(0, 122, 255, 0.1)",
-                              borderRadius: "10px",
-                            }}
-                          >
-                            <MapPin
-                              className="h-4 w-4"
-                              style={{ color: appleColors.blue }}
-                            />
-                            <span style={{ color: appleColors.text.primary }}>
-                              Location selected. Tap on map to adjust.
-                            </span>
-                          </div>
-                        )}
-                      </form>
-                    </TabsContent>
-                  </Tabs>
-                </div>
-              </div>
-            </div>
+            <CommunityFormPanel
+              community={newCommunity}
+              onCommunityChange={setNewCommunity}
+              onSubmit={handleSubmit}
+              onCancel={cancelAddLocation}
+              appleColors={appleColors}
+            />
           )}
 
           {showTour && (

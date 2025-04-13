@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useUserStore } from "../stores";
+import { useUserStore, useLocationStore } from "../stores";
 import { User, Search, Filter, X, Eye } from "lucide-react";
 
 const OtherUsersList: React.FC = () => {
@@ -55,12 +55,16 @@ const OtherUsersList: React.FC = () => {
     profiles.flatMap(profile => profile.games || [])
   )).sort();
 
-  // Toggle viewing a user's data
+  // Toggle viewing a user's data and update the community filter on MapView
   const toggleViewUser = (userId: string) => {
+    const { setViewingProfile, viewingProfileId } = useUserStore.getState();
+    const { setCreatorFilter } = useLocationStore.getState();
     if (viewingProfileId === userId) {
       setViewingProfile(null); // Toggle off
+      setCreatorFilter(null);
     } else {
       setViewingProfile(userId); // Toggle on
+      setCreatorFilter(userId);
     }
   };
 

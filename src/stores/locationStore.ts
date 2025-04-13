@@ -20,7 +20,6 @@ export interface Location {
   createdAt: number;
   placeId: string;
   category: string;
-  isOpen?: boolean | null;
   reviews?: Review[];
 }
 
@@ -28,6 +27,7 @@ export interface LocationState {
   locations: Record<string, Location>;
   // Add a map of user IDs to names
   userNames: Record<string, string>;
+  creatorFilter: string | null;
 
   // Actions
   addLocation: (
@@ -41,6 +41,8 @@ export interface LocationState {
   updateUserName: (userId: string, name: string) => void;
   addReview: (locationId: string, rating: number, comment: string) => void;
   removeReview: (locationId: string, reviewId: string) => void;
+  deleteLocation: (locationId: string) => void;
+  setCreatorFilter: (filter: string | null) => void;
 }
 
 // Generate a random ID
@@ -48,10 +50,11 @@ const generateId = () => Math.random().toString(36).substring(2, 15);
 
 export const useLocationStore = create<LocationState>(
   sync(
-    (set) => ({
+    (set, get) => ({
       // State
       locations: {},
       userNames: {}, // Initialize empty map of user IDs to names
+      creatorFilter: null,
 
       // Actions
       addLocation: (locationData) => {
@@ -197,6 +200,26 @@ export const useLocationStore = create<LocationState>(
           };
         });
       },
+
+      deleteLocation: (locationId) => {
+        // Get existing locations from the current state directly
+        const existingLocations = { ...get().locations };
+        
+        // Delete the specified location
+        delete existingLocations[locationId];
+        
+        // Update state
+        set({ locations: existingLocations });
+        
+        // Persist to storage
+        try {
+          localStorage.setItem("locations", JSON.stringify(existingLocations));
+        } catch (error) {
+          console.error("Error saving locations to localStorage:", error);
+        }
+      },
+
+      setCreatorFilter: (filter: string | null) => set({ creatorFilter: filter }),
     }),
     {
       docId: "my-world-locations",

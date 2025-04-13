@@ -1,0 +1,2252 @@
+{
+  "0ce890d9-91b3-4929-8b33-d895a9777010": {
+    "id": "0ce890d9-91b3-4929-8b33-d895a9777010",
+    "name": "Battletech at The War Room",
+    "description": "Join our Battletech group! Spacious venue with a dedicated area for wargaming and painting. We meet Tuesday afternoon.",
+    "latitude": 51.50048541924104,
+    "longitude": -0.16426137835000468,
+    "placeId": "place_id_477276",
+    "category": "paid",
+    "tags": [
+      "Afternoon",
+      "Teacher",
+      "community",
+      "Monthly",
+      "Miniatures",
+      "Battletech"
+    ],
+    "gameType": "Battletech",
+    "addedBy": "user_7",
+    "communityData": {
+      "genre": "Miniatures",
+      "gameType": "Battletech",
+      "playerRoles": [
+        "Teacher"
+      ],
+      "playersNeeded": 5,
+      "experienceLevel": "all",
+      "schedule": {
+        "days": [
+          "Tuesday"
+        ],
+        "time": "Afternoon",
+        "frequency": "Monthly"
+      },
+      "contactInfo": "Email us at TheWarRoom@gmail.com",
+      "createdAt": 1737088955269
+    },
+    "createdAt": 1737088955269
+  },
+  "5d52ec17-6825-409f-8746-9b6133c88380": {
+    "id": "5d52ec17-6825-409f-8746-9b6133c88380",
+    "name": "Chess at Brixton Boardgamers",
+    "description": "Join our Chess group! Friendly local community hub for gamers of all types. We meet Saturday night.",
+    "latitude": 51.42311762341656,
+    "longitude": -0.3209356932090419,
+    "placeId": "place_id_111933",
+    "category": "paid",
+    "tags": [
+      "Strategy",
+      "Night",
+      "Chess",
+      "Irregular",
+      "community",
+      "Casual"
+    ],
+    "gameType": "Chess",
+    "addedBy": "user_1",
+    "communityData": {
+      "genre": "Strategy",
+      "gameType": "Chess",
+      "playerRoles": [
+        "Casual"
+      ],
+      "playersNeeded": 4,
+      "experienceLevel": "intermediate",
+      "schedule": {
+        "days": [
+          "Saturday"
+        ],
+        "time": "Night",
+        "frequency": "Irregular"
+      },
+      "contactInfo": "Message on Meetup.com group: London Chess",
+      "createdAt": 1738984037037
+    },
+    "createdAt": 1738984037037
+  },
+  "15c5f45d-38cc-449d-8403-8f66cbfc55d2": {
+    "id": "15c5f45d-38cc-449d-8403-8f66cbfc55d2",
+    "name": "Warhammer 40K at Spell & Sword Club",
+    "description": "Join our Warhammer 40K group! Spacious venue with a dedicated area for wargaming and painting. We meet Friday, Saturday, Monday night.",
+    "latitude": 51.47746980801294,
+    "longitude": -0.0005394844587610081,
+    "placeId": "place_id_590052",
+    "category": "premium",
+    "tags": [
+      "Night",
+      "One-time",
+      "community",
+      "Miniatures",
+      "Collector",
+      "Warhammer 40K"
+    ],
+    "gameType": "Warhammer 40K",
+    "addedBy": "user_10",
+    "communityData": {
+      "genre": "Miniatures",
+      "gameType": "Warhammer 40K",
+      "playerRoles": [
+        "Collector"
+      ],
+      "playersNeeded": 4,
+      "experienceLevel": "experienced",
+      "schedule": {
+        "days": [
+          "Friday",
+          "Saturday",
+          "Monday"
+        ],
+        "time": "Night",
+        "frequency": "One-time"
+      },
+      "contactInfo": "Message on Meetup.com group: London Warhammer 40K",
+      "createdAt": 1742232885336
+    },
+    "createdAt": 1742232885336
+  },
+  "e9c2052f-fde3-4cfa-a57c-8db0612b2a18": {
+    "id": "e9c2052f-fde3-4cfa-a57c-8db0612b2a18",
+    "name": "Magic: The Gathering at Spell & Sword Club",
+    "description": "Join our Magic: The Gathering group! Casual drop-in space where you can always find a game. We meet Saturday, Monday, Wednesday night.",
+    "latitude": 51.56462815525129,
+    "longitude": -0.005020550798777806,
+    "placeId": "place_id_666253",
+    "category": "free",
+    "tags": [
+      "Magic: The Gathering",
+      "Night",
+      "CardGames",
+      "community",
+      "Monthly",
+      "Collector"
+    ],
+    "gameType": "Magic: The Gathering",
+    "addedBy": "user_7",
+    "communityData": {
+      "genre": "CardGames",
+      "gameType": "Magic: The Gathering",
+      "playerRoles": [
+        "Collector"
+      ],
+      "playersNeeded": 4,
+      "experienceLevel": "beginner",
+      "schedule": {
+        "days": [
+          "Saturday",
+          "Monday",
+          "Wednesday"
+        ],
+        "time": "Night",
+        "frequency": "Monthly"
+      },
+      "contactInfo": "Message on Meetup.com group: London Magic: The Gathering",
+      "createdAt": 1744446337723
+    },
+    "createdAt": 1744446337723
+  },
+  "6afab49f-573c-44c7-af70-0270de7132a6": {
+    "id": "6afab49f-573c-44c7-af70-0270de7132a6",
+    "name": "Star Wars X-Wing at Shoreditch Game Center",
+    "description": "Join our Star Wars X-Wing group! High-end gaming experience with premium components and service. We meet Wednesday flexible.",
+    "latitude": 51.46152313005554,
+    "longitude": 0.0849204329645222,
+    "placeId": "place_id_745514",
+    "category": "paid",
+    "tags": [
+      "Beginner",
+      "Teacher",
+      "Weekly",
+      "community",
+      "Competitive",
+      "Star Wars X-Wing",
+      "Flexible",
+      "Miniatures"
+    ],
+    "gameType": "Star Wars X-Wing",
+    "addedBy": "user_4",
+    "communityData": {
+      "genre": "Miniatures",
+      "gameType": "Star Wars X-Wing",
+      "playerRoles": [
+        "Competitive",
+        "Beginner",
+        "Teacher"
+      ],
+      "playersNeeded": 4,
+      "experienceLevel": "intermediate",
+      "schedule": {
+        "days": [
+          "Wednesday"
+        ],
+        "time": "Flexible",
+        "frequency": "Weekly"
+      },
+      "contactInfo": "Find us on Discord: Star Wars X-WingLondon",
+      "createdAt": 1740770123423
+    },
+    "createdAt": 1740770123423
+  },
+  "1f427dec-5350-4294-988f-df4af9044ffd": {
+    "id": "1f427dec-5350-4294-988f-df4af9044ffd",
+    "name": "Monopoly at Blackfriars Board Games",
+    "description": "Join our Monopoly group! Competitive scene with regular tournaments and leagues. We meet Saturday, Sunday, Tuesday morning.",
+    "latitude": 51.49522178733588,
+    "longitude": -0.20879856598900068,
+    "placeId": "place_id_952607",
+    "category": "paid",
+    "tags": [
+      "Morning",
+      "Teacher",
+      "Monopoly",
+      "community",
+      "Monthly",
+      "Expert",
+      "BoardGames"
+    ],
+    "gameType": "Monopoly",
+    "addedBy": "user_10",
+    "communityData": {
+      "genre": "BoardGames",
+      "gameType": "Monopoly",
+      "playerRoles": [
+        "Teacher",
+        "Expert"
+      ],
+      "playersNeeded": 1,
+      "experienceLevel": "beginner",
+      "schedule": {
+        "days": [
+          "Saturday",
+          "Sunday",
+          "Tuesday"
+        ],
+        "time": "Morning",
+        "frequency": "Monthly"
+      },
+      "contactInfo": "Join our WhatsApp group: link in bio",
+      "createdAt": 1741515972452
+    },
+    "createdAt": 1741515972452
+  },
+  "66f0d601-4925-4a30-94cf-c86301eff049": {
+    "id": "66f0d601-4925-4a30-94cf-c86301eff049",
+    "name": "Battletech at Brixton Boardgamers",
+    "description": "Join our Battletech group! Spacious venue with a dedicated area for wargaming and painting. We meet Wednesday night.",
+    "latitude": 51.51455035334358,
+    "longitude": 0.08464610916261597,
+    "placeId": "place_id_750175",
+    "category": "free",
+    "tags": [
+      "Beginner",
+      "Night",
+      "community",
+      "Competitive",
+      "Bi-weekly",
+      "Miniatures",
+      "Battletech"
+    ],
+    "gameType": "Battletech",
+    "addedBy": "user_8",
+    "communityData": {
+      "genre": "Miniatures",
+      "gameType": "Battletech",
+      "playerRoles": [
+        "Competitive",
+        "Beginner"
+      ],
+      "playersNeeded": 2,
+      "experienceLevel": "experienced",
+      "schedule": {
+        "days": [
+          "Wednesday"
+        ],
+        "time": "Night",
+        "frequency": "Bi-weekly"
+      },
+      "contactInfo": "Find us on Discord: BattletechLondon",
+      "createdAt": 1741026137625
+    },
+    "createdAt": 1741026137625
+  },
+  "43150b13-8f68-4268-9e84-5c9356b7a11a": {
+    "id": "43150b13-8f68-4268-9e84-5c9356b7a11a",
+    "name": "Backgammon at Tabletop Tavern",
+    "description": "Join our Backgammon group! High-end gaming experience with premium components and service. We meet Saturday afternoon.",
+    "latitude": 51.59267274213124,
+    "longitude": -0.24448122261743854,
+    "placeId": "place_id_638382",
+    "category": "premium",
+    "tags": [
+      "Afternoon",
+      "Strategy",
+      "Beginner",
+      "Weekly",
+      "Backgammon",
+      "community",
+      "Competitive",
+      "Expert"
+    ],
+    "gameType": "Backgammon",
+    "addedBy": "user_5",
+    "communityData": {
+      "genre": "Strategy",
+      "gameType": "Backgammon",
+      "playerRoles": [
+        "Expert",
+        "Beginner",
+        "Competitive"
+      ],
+      "playersNeeded": 5,
+      "experienceLevel": "experienced",
+      "schedule": {
+        "days": [
+          "Saturday"
+        ],
+        "time": "Afternoon",
+        "frequency": "Weekly"
+      },
+      "contactInfo": "Join our WhatsApp group: link in bio",
+      "createdAt": 1737234776050
+    },
+    "createdAt": 1737234776050
+  },
+  "b5d2e02e-ff34-4483-b0e7-70e04445478f": {
+    "id": "b5d2e02e-ff34-4483-b0e7-70e04445478f",
+    "name": "Backgammon at Soho Strategy Center",
+    "description": "Join our Backgammon group! Spacious venue with a dedicated area for wargaming and painting. We meet Thursday, Sunday, Tuesday afternoon.",
+    "latitude": 51.4979135114011,
+    "longitude": -0.007167821545908962,
+    "placeId": "place_id_750658",
+    "category": "free",
+    "tags": [
+      "Afternoon",
+      "Strategy",
+      "Beginner",
+      "Backgammon",
+      "community",
+      "Competitive",
+      "Bi-weekly",
+      "Casual"
+    ],
+    "gameType": "Backgammon",
+    "addedBy": "user_1",
+    "communityData": {
+      "genre": "Strategy",
+      "gameType": "Backgammon",
+      "playerRoles": [
+        "Beginner",
+        "Casual",
+        "Competitive"
+      ],
+      "playersNeeded": 6,
+      "experienceLevel": "intermediate",
+      "schedule": {
+        "days": [
+          "Thursday",
+          "Sunday",
+          "Tuesday"
+        ],
+        "time": "Afternoon",
+        "frequency": "Bi-weekly"
+      },
+      "contactInfo": "Message on Meetup.com group: London Backgammon",
+      "createdAt": 1743317215786
+    },
+    "createdAt": 1743317215786
+  },
+  "ad9eb9be-9ebb-4a29-b558-09957ab036a3": {
+    "id": "ad9eb9be-9ebb-4a29-b558-09957ab036a3",
+    "name": "Risk at London Geekout",
+    "description": "Join our Risk group! A cozy gaming cafe with plenty of tables for RPGs and board games. We meet Sunday, Saturday, Tuesday flexible.",
+    "latitude": 51.599190556910024,
+    "longitude": -0.0967127124620456,
+    "placeId": "place_id_898215",
+    "category": "paid",
+    "tags": [
+      "Teacher",
+      "Risk",
+      "Flexible",
+      "community",
+      "Competitive",
+      "Monthly",
+      "Expert",
+      "BoardGames"
+    ],
+    "gameType": "Risk",
+    "addedBy": "user_3",
+    "communityData": {
+      "genre": "BoardGames",
+      "gameType": "Risk",
+      "playerRoles": [
+        "Expert",
+        "Competitive",
+        "Teacher"
+      ],
+      "playersNeeded": 6,
+      "experienceLevel": "intermediate",
+      "schedule": {
+        "days": [
+          "Sunday",
+          "Saturday",
+          "Tuesday"
+        ],
+        "time": "Flexible",
+        "frequency": "Monthly"
+      },
+      "contactInfo": "Instagram: @LondonGeekoutGames",
+      "createdAt": 1742553110945
+    },
+    "createdAt": 1742553110945
+  },
+  "23346be0-cb14-4679-9456-df6716c5c8b8": {
+    "id": "23346be0-cb14-4679-9456-df6716c5c8b8",
+    "name": "Hearthstone at Queen's Gambit",
+    "description": "Join our Hearthstone group! Casual drop-in space where you can always find a game. We meet Monday, Tuesday morning.",
+    "latitude": 51.37564086328007,
+    "longitude": -0.16680388883392477,
+    "placeId": "place_id_420873",
+    "category": "premium",
+    "tags": [
+      "Morning",
+      "Beginner",
+      "CardGames",
+      "community",
+      "Bi-weekly",
+      "Hearthstone"
+    ],
+    "gameType": "Hearthstone",
+    "addedBy": "user_8",
+    "communityData": {
+      "genre": "CardGames",
+      "gameType": "Hearthstone",
+      "playerRoles": [
+        "Beginner"
+      ],
+      "playersNeeded": 5,
+      "experienceLevel": "all",
+      "schedule": {
+        "days": [
+          "Monday",
+          "Tuesday"
+        ],
+        "time": "Morning",
+        "frequency": "Bi-weekly"
+      },
+      "contactInfo": "Email us at QueensGambit@gmail.com",
+      "createdAt": 1739490141328
+    },
+    "createdAt": 1739490141328
+  },
+  "ff2ab971-926e-4459-8a50-d13805081e79": {
+    "id": "ff2ab971-926e-4459-8a50-d13805081e79",
+    "name": "Backgammon at Spell & Sword Club",
+    "description": "Join our Backgammon group! Competitive scene with regular tournaments and leagues. We meet Saturday, Sunday evening.",
+    "latitude": 51.47227118066736,
+    "longitude": -0.22267633783571777,
+    "placeId": "place_id_155374",
+    "category": "free",
+    "tags": [
+      "Strategy",
+      "One-time",
+      "Backgammon",
+      "community",
+      "Expert",
+      "Evening"
+    ],
+    "gameType": "Backgammon",
+    "addedBy": "user_10",
+    "communityData": {
+      "genre": "Strategy",
+      "gameType": "Backgammon",
+      "playerRoles": [
+        "Expert"
+      ],
+      "playersNeeded": 3,
+      "experienceLevel": "beginner",
+      "schedule": {
+        "days": [
+          "Saturday",
+          "Sunday"
+        ],
+        "time": "Evening",
+        "frequency": "One-time"
+      },
+      "contactInfo": "Facebook community: SpellSwordClub Players",
+      "createdAt": 1736832248204
+    },
+    "createdAt": 1736832248204
+  },
+  "b892cc9b-9eee-4b24-b535-e48c1045084a": {
+    "id": "b892cc9b-9eee-4b24-b535-e48c1045084a",
+    "name": "Catan at Shoreditch Game Center",
+    "description": "Join our Catan group! High-end gaming experience with premium components and service. We meet Tuesday, Thursday afternoon.",
+    "latitude": 51.48192866116286,
+    "longitude": -0.09877769752492058,
+    "placeId": "place_id_828065",
+    "category": "paid",
+    "tags": [
+      "Catan",
+      "Afternoon",
+      "Beginner",
+      "community",
+      "Competitive",
+      "Bi-weekly",
+      "BoardGames"
+    ],
+    "gameType": "Catan",
+    "addedBy": "user_2",
+    "communityData": {
+      "genre": "BoardGames",
+      "gameType": "Catan",
+      "playerRoles": [
+        "Competitive",
+        "Beginner"
+      ],
+      "playersNeeded": 1,
+      "experienceLevel": "intermediate",
+      "schedule": {
+        "days": [
+          "Tuesday",
+          "Thursday"
+        ],
+        "time": "Afternoon",
+        "frequency": "Bi-weekly"
+      },
+      "contactInfo": "Message on Meetup.com group: London Catan",
+      "createdAt": 1739510218188
+    },
+    "createdAt": 1739510218188
+  },
+  "875eda35-ad49-453a-9499-d302ac944cd0": {
+    "id": "875eda35-ad49-453a-9499-d302ac944cd0",
+    "name": "LARP at The Dragon's Lair Gaming Cafe",
+    "description": "Join our LARP group! Casual drop-in space where you can always find a game. We meet Monday morning.",
+    "latitude": 51.44229784649518,
+    "longitude": -0.17403644221094688,
+    "placeId": "place_id_814913",
+    "category": "paid",
+    "tags": [
+      "LARP",
+      "Morning",
+      "Organizer",
+      "community",
+      "Bi-weekly",
+      "Player",
+      "TTRPG"
+    ],
+    "gameType": "LARP",
+    "addedBy": "user_2",
+    "communityData": {
+      "genre": "TTRPG",
+      "gameType": "LARP",
+      "playerRoles": [
+        "Player",
+        "Organizer"
+      ],
+      "playersNeeded": 5,
+      "experienceLevel": "all",
+      "schedule": {
+        "days": [
+          "Monday"
+        ],
+        "time": "Morning",
+        "frequency": "Bi-weekly"
+      },
+      "contactInfo": "Email us at TheDragonsLairGamingCafe@gmail.com",
+      "createdAt": 1739769636784
+    },
+    "createdAt": 1739769636784
+  },
+  "30e4df40-0e7e-4b9d-829c-c787ef91210d": {
+    "id": "30e4df40-0e7e-4b9d-829c-c787ef91210d",
+    "name": "Call of Cthulhu at Citadel of Games",
+    "description": "Join our Call of Cthulhu group! A cozy gaming cafe with plenty of tables for RPGs and board games. We meet Monday, Sunday night.",
+    "latitude": 51.47147219160805,
+    "longitude": 0.029841758493477977,
+    "placeId": "place_id_332930",
+    "category": "premium",
+    "tags": [
+      "Night",
+      "One-time",
+      "Call of Cthulhu",
+      "community",
+      "Player",
+      "TTRPG"
+    ],
+    "gameType": "Call of Cthulhu",
+    "addedBy": "user_5",
+    "communityData": {
+      "genre": "TTRPG",
+      "gameType": "Call of Cthulhu",
+      "playerRoles": [
+        "Player"
+      ],
+      "playersNeeded": 2,
+      "experienceLevel": "experienced",
+      "schedule": {
+        "days": [
+          "Monday",
+          "Sunday"
+        ],
+        "time": "Night",
+        "frequency": "One-time"
+      },
+      "contactInfo": "Instagram: @CitadelofGamesGames",
+      "createdAt": 1739479160357
+    },
+    "createdAt": 1739479160357
+  },
+  "a6467b00-282e-4be8-ac2c-ae2f0e8cb3c6": {
+    "id": "a6467b00-282e-4be8-ac2c-ae2f0e8cb3c6",
+    "name": "Go at Critical Hit Gaming",
+    "description": "Join our Go group! Late-night gaming den with a focus on strategy games. We meet Wednesday, Monday afternoon.",
+    "latitude": 51.52070943445365,
+    "longitude": -0.021223077604035592,
+    "placeId": "place_id_248814",
+    "category": "paid",
+    "tags": [
+      "Afternoon",
+      "Strategy",
+      "One-time",
+      "Go",
+      "community",
+      "Competitive",
+      "Expert",
+      "Casual"
+    ],
+    "gameType": "Go",
+    "addedBy": "user_9",
+    "communityData": {
+      "genre": "Strategy",
+      "gameType": "Go",
+      "playerRoles": [
+        "Expert",
+        "Competitive",
+        "Casual"
+      ],
+      "playersNeeded": 4,
+      "experienceLevel": "intermediate",
+      "schedule": {
+        "days": [
+          "Wednesday",
+          "Monday"
+        ],
+        "time": "Afternoon",
+        "frequency": "One-time"
+      },
+      "contactInfo": "Find us on Discord: GoLondon",
+      "createdAt": 1743511614883
+    },
+    "createdAt": 1743511614883
+  },
+  "24740bfd-c328-4f49-96a7-ddd5e76ecfce": {
+    "id": "24740bfd-c328-4f49-96a7-ddd5e76ecfce",
+    "name": "Magic: The Gathering at Victoria Virtuosos",
+    "description": "Join our Magic: The Gathering group! Late-night gaming den with a focus on strategy games. We meet Sunday, Wednesday, Tuesday afternoon.",
+    "latitude": 51.47186148212375,
+    "longitude": -0.20841810455035667,
+    "placeId": "place_id_651687",
+    "category": "free",
+    "tags": [
+      "Afternoon",
+      "Magic: The Gathering",
+      "CardGames",
+      "community",
+      "Bi-weekly",
+      "Casual"
+    ],
+    "gameType": "Magic: The Gathering",
+    "addedBy": "user_2",
+    "communityData": {
+      "genre": "CardGames",
+      "gameType": "Magic: The Gathering",
+      "playerRoles": [
+        "Casual"
+      ],
+      "playersNeeded": 6,
+      "experienceLevel": "experienced",
+      "schedule": {
+        "days": [
+          "Sunday",
+          "Wednesday",
+          "Tuesday"
+        ],
+        "time": "Afternoon",
+        "frequency": "Bi-weekly"
+      },
+      "contactInfo": "Contact the organizer at 07XX-XXX-XXX",
+      "createdAt": 1742541420447
+    },
+    "createdAt": 1742541420447
+  },
+  "9652adf9-721a-4755-927c-d1875eec1168": {
+    "id": "9652adf9-721a-4755-927c-d1875eec1168",
+    "name": "Warhammer 40K at Royal Gaming Society",
+    "description": "Join our Warhammer 40K group! Casual drop-in space where you can always find a game. We meet Tuesday flexible.",
+    "latitude": 51.513219745627985,
+    "longitude": 0.05481441041526397,
+    "placeId": "place_id_404594",
+    "category": "premium",
+    "tags": [
+      "Irregular",
+      "community",
+      "Competitive",
+      "Collector",
+      "Flexible",
+      "Miniatures",
+      "Casual",
+      "Warhammer 40K"
+    ],
+    "gameType": "Warhammer 40K",
+    "addedBy": "user_2",
+    "communityData": {
+      "genre": "Miniatures",
+      "gameType": "Warhammer 40K",
+      "playerRoles": [
+        "Competitive",
+        "Casual",
+        "Collector"
+      ],
+      "playersNeeded": 2,
+      "experienceLevel": "beginner",
+      "schedule": {
+        "days": [
+          "Tuesday"
+        ],
+        "time": "Flexible",
+        "frequency": "Irregular"
+      },
+      "contactInfo": "Email us at RoyalGamingSociety@gmail.com",
+      "createdAt": 1744328897182
+    },
+    "createdAt": 1744328897182
+  },
+  "ea7482ea-f9b3-4100-8f76-39352b914a32": {
+    "id": "ea7482ea-f9b3-4100-8f76-39352b914a32",
+    "name": "Pathfinder at Blackfriars Board Games",
+    "description": "Join our Pathfinder group! Historic venue that's been hosting games for decades. We meet Friday, Wednesday, Sunday morning.",
+    "latitude": 51.528477748006104,
+    "longitude": 0.035334960867337034,
+    "placeId": "place_id_671007",
+    "category": "free",
+    "tags": [
+      "Pathfinder",
+      "Morning",
+      "One-time",
+      "community",
+      "Player",
+      "Both",
+      "TTRPG"
+    ],
+    "gameType": "Pathfinder",
+    "addedBy": "user_2",
+    "communityData": {
+      "genre": "TTRPG",
+      "gameType": "Pathfinder",
+      "playerRoles": [
+        "Player",
+        "Both"
+      ],
+      "playersNeeded": 1,
+      "experienceLevel": "intermediate",
+      "schedule": {
+        "days": [
+          "Friday",
+          "Wednesday",
+          "Sunday"
+        ],
+        "time": "Morning",
+        "frequency": "One-time"
+      },
+      "contactInfo": "Join our WhatsApp group: link in bio",
+      "createdAt": 1744209087797
+    },
+    "createdAt": 1744209087797
+  },
+  "74ae4b12-eeb5-4f52-9e7e-438b789b3f85": {
+    "id": "74ae4b12-eeb5-4f52-9e7e-438b789b3f85",
+    "name": "Hearthstone at London Geekout",
+    "description": "Join our Hearthstone group! Late-night gaming den with a focus on strategy games. We meet Saturday night.",
+    "latitude": 51.63732711416404,
+    "longitude": -0.15657435869801828,
+    "placeId": "place_id_683625",
+    "category": "free",
+    "tags": [
+      "Night",
+      "CardGames",
+      "Irregular",
+      "community",
+      "Expert",
+      "Casual",
+      "Hearthstone"
+    ],
+    "gameType": "Hearthstone",
+    "addedBy": "user_6",
+    "communityData": {
+      "genre": "CardGames",
+      "gameType": "Hearthstone",
+      "playerRoles": [
+        "Expert",
+        "Casual"
+      ],
+      "playersNeeded": 1,
+      "experienceLevel": "intermediate",
+      "schedule": {
+        "days": [
+          "Saturday"
+        ],
+        "time": "Night",
+        "frequency": "Irregular"
+      },
+      "contactInfo": "Email us at LondonGeekout@gmail.com",
+      "createdAt": 1743982490371
+    },
+    "createdAt": 1743982490371
+  },
+  "19a22b9c-4cc6-48c5-8564-ad2e8de3bb5d": {
+    "id": "19a22b9c-4cc6-48c5-8564-ad2e8de3bb5d",
+    "name": "DnD at Blackfriars Board Games",
+    "description": "Join our DnD group! High-end gaming experience with premium components and service. We meet Wednesday, Friday, Sunday afternoon.",
+    "latitude": 51.39470908399007,
+    "longitude": 0.053309468878608074,
+    "placeId": "place_id_611356",
+    "category": "free",
+    "tags": [
+      "Afternoon",
+      "DnD",
+      "Irregular",
+      "community",
+      "Both",
+      "TTRPG"
+    ],
+    "gameType": "DnD",
+    "addedBy": "user_8",
+    "communityData": {
+      "genre": "TTRPG",
+      "gameType": "DnD",
+      "playerRoles": [
+        "Both"
+      ],
+      "playersNeeded": 6,
+      "experienceLevel": "intermediate",
+      "schedule": {
+        "days": [
+          "Wednesday",
+          "Friday",
+          "Sunday"
+        ],
+        "time": "Afternoon",
+        "frequency": "Irregular"
+      },
+      "contactInfo": "Join our WhatsApp group: link in bio",
+      "createdAt": 1738814901383
+    },
+    "createdAt": 1738814901383
+  },
+  "9b9ea7a1-0f5c-44b2-b7b2-ca066ae460b1": {
+    "id": "9b9ea7a1-0f5c-44b2-b7b2-ca066ae460b1",
+    "name": "Call of Cthulhu at Westminster Wargaming",
+    "description": "Join our Call of Cthulhu group! Competitive scene with regular tournaments and leagues. We meet Thursday, Saturday evening.",
+    "latitude": 51.55964559301845,
+    "longitude": 0.07083723359103763,
+    "placeId": "place_id_471174",
+    "category": "free",
+    "tags": [
+      "One-time",
+      "Call of Cthulhu",
+      "Keeper",
+      "community",
+      "TTRPG",
+      "Evening"
+    ],
+    "gameType": "Call of Cthulhu",
+    "addedBy": "user_5",
+    "communityData": {
+      "genre": "TTRPG",
+      "gameType": "Call of Cthulhu",
+      "playerRoles": [
+        "Keeper"
+      ],
+      "playersNeeded": 2,
+      "experienceLevel": "experienced",
+      "schedule": {
+        "days": [
+          "Thursday",
+          "Saturday"
+        ],
+        "time": "Evening",
+        "frequency": "One-time"
+      },
+      "contactInfo": "Join our WhatsApp group: link in bio",
+      "createdAt": 1738667230442
+    },
+    "createdAt": 1738667230442
+  },
+  "4e150772-af22-4983-b84e-7955bd482b1d": {
+    "id": "4e150772-af22-4983-b84e-7955bd482b1d",
+    "name": "DnD at Queen's Gambit",
+    "description": "Join our DnD group! High-end gaming experience with premium components and service. We meet Monday, Saturday morning.",
+    "latitude": 51.411336162188114,
+    "longitude": 0.0419659173866582,
+    "placeId": "place_id_765566",
+    "category": "paid",
+    "tags": [
+      "Morning",
+      "Weekly",
+      "DnD",
+      "community",
+      "Player",
+      "Both",
+      "TTRPG",
+      "DM"
+    ],
+    "gameType": "DnD",
+    "addedBy": "user_3",
+    "communityData": {
+      "genre": "TTRPG",
+      "gameType": "DnD",
+      "playerRoles": [
+        "Both",
+        "Player",
+        "DM"
+      ],
+      "playersNeeded": 2,
+      "experienceLevel": "all",
+      "schedule": {
+        "days": [
+          "Monday",
+          "Saturday"
+        ],
+        "time": "Morning",
+        "frequency": "Weekly"
+      },
+      "contactInfo": "Find us on Discord: DnDLondon",
+      "createdAt": 1741536808850
+    },
+    "createdAt": 1741536808850
+  },
+  "4338b4ae-9af5-4e29-85d1-30e55d487563": {
+    "id": "4338b4ae-9af5-4e29-85d1-30e55d487563",
+    "name": "Magic: The Gathering at Hackney Game Hub",
+    "description": "Join our Magic: The Gathering group! Casual drop-in space where you can always find a game. We meet Tuesday afternoon.",
+    "latitude": 51.56934216205281,
+    "longitude": -0.15982413663621647,
+    "placeId": "place_id_509879",
+    "category": "premium",
+    "tags": [
+      "Afternoon",
+      "Magic: The Gathering",
+      "CardGames",
+      "community",
+      "Competitive",
+      "Monthly"
+    ],
+    "gameType": "Magic: The Gathering",
+    "addedBy": "user_8",
+    "communityData": {
+      "genre": "CardGames",
+      "gameType": "Magic: The Gathering",
+      "playerRoles": [
+        "Competitive"
+      ],
+      "playersNeeded": 4,
+      "experienceLevel": "beginner",
+      "schedule": {
+        "days": [
+          "Tuesday"
+        ],
+        "time": "Afternoon",
+        "frequency": "Monthly"
+      },
+      "contactInfo": "Instagram: @HackneyGameHubGames",
+      "createdAt": 1744280242089
+    },
+    "createdAt": 1744280242089
+  },
+  "8d09205b-ae44-46a5-b08a-b01ebe578543": {
+    "id": "8d09205b-ae44-46a5-b08a-b01ebe578543",
+    "name": "Battletech at Victoria Virtuosos",
+    "description": "Join our Battletech group! Historic venue that's been hosting games for decades. We meet Tuesday, Monday night.",
+    "latitude": 51.46192897992638,
+    "longitude": -0.24918145981090323,
+    "placeId": "place_id_932519",
+    "category": "premium",
+    "tags": [
+      "Beginner",
+      "Teacher",
+      "Night",
+      "community",
+      "Monthly",
+      "Miniatures",
+      "Battletech"
+    ],
+    "gameType": "Battletech",
+    "addedBy": "user_7",
+    "communityData": {
+      "genre": "Miniatures",
+      "gameType": "Battletech",
+      "playerRoles": [
+        "Teacher",
+        "Beginner"
+      ],
+      "playersNeeded": 1,
+      "experienceLevel": "intermediate",
+      "schedule": {
+        "days": [
+          "Tuesday",
+          "Monday"
+        ],
+        "time": "Night",
+        "frequency": "Monthly"
+      },
+      "contactInfo": "Find us on Discord: BattletechLondon",
+      "createdAt": 1744227544169
+    },
+    "createdAt": 1744227544169
+  },
+  "6d0e413c-33df-4346-bbf4-eb7720cca928": {
+    "id": "6d0e413c-33df-4346-bbf4-eb7720cca928",
+    "name": "Pathfinder at Greenwich Gamer's Guild",
+    "description": "Join our Pathfinder group! Academic atmosphere for serious game enthusiasts. We meet Saturday night.",
+    "latitude": 51.507305587453715,
+    "longitude": -0.22063073984064208,
+    "placeId": "place_id_664573",
+    "category": "premium",
+    "tags": [
+      "Pathfinder",
+      "Night",
+      "Weekly",
+      "community",
+      "GM",
+      "Player",
+      "Both",
+      "TTRPG"
+    ],
+    "gameType": "Pathfinder",
+    "addedBy": "user_5",
+    "communityData": {
+      "genre": "TTRPG",
+      "gameType": "Pathfinder",
+      "playerRoles": [
+        "Player",
+        "GM",
+        "Both"
+      ],
+      "playersNeeded": 6,
+      "experienceLevel": "experienced",
+      "schedule": {
+        "days": [
+          "Saturday"
+        ],
+        "time": "Night",
+        "frequency": "Weekly"
+      },
+      "contactInfo": "Instagram: @GreenwichGamersGuildGames",
+      "createdAt": 1739683396896
+    },
+    "createdAt": 1739683396896
+  },
+  "ea2fecb5-c69f-4daa-9677-550734fe3ea8": {
+    "id": "ea2fecb5-c69f-4daa-9677-550734fe3ea8",
+    "name": "Hearthstone at Spell & Sword Club",
+    "description": "Join our Hearthstone group! Spacious venue with a dedicated area for wargaming and painting. We meet Wednesday, Friday afternoon.",
+    "latitude": 51.612484765317404,
+    "longitude": -0.07379877963777622,
+    "placeId": "place_id_720360",
+    "category": "free",
+    "tags": [
+      "Afternoon",
+      "Teacher",
+      "CardGames",
+      "community",
+      "Monthly",
+      "Hearthstone"
+    ],
+    "gameType": "Hearthstone",
+    "addedBy": "user_10",
+    "communityData": {
+      "genre": "CardGames",
+      "gameType": "Hearthstone",
+      "playerRoles": [
+        "Teacher"
+      ],
+      "playersNeeded": 5,
+      "experienceLevel": "experienced",
+      "schedule": {
+        "days": [
+          "Wednesday",
+          "Friday"
+        ],
+        "time": "Afternoon",
+        "frequency": "Monthly"
+      },
+      "contactInfo": "Join our WhatsApp group: link in bio",
+      "createdAt": 1737787567434
+    },
+    "createdAt": 1737787567434
+  },
+  "16b7e701-f2a1-4c20-a22a-135e0e9a1d32": {
+    "id": "16b7e701-f2a1-4c20-a22a-135e0e9a1d32",
+    "name": "Scrabble at Critical Hit Gaming",
+    "description": "Join our Scrabble group! High-end gaming experience with premium components and service. We meet Thursday, Sunday afternoon.",
+    "latitude": 51.56941937691494,
+    "longitude": -0.0698911176183037,
+    "placeId": "place_id_235452",
+    "category": "premium",
+    "tags": [
+      "Afternoon",
+      "Beginner",
+      "Teacher",
+      "Irregular",
+      "community",
+      "Scrabble",
+      "Expert",
+      "BoardGames"
+    ],
+    "gameType": "Scrabble",
+    "addedBy": "user_4",
+    "communityData": {
+      "genre": "BoardGames",
+      "gameType": "Scrabble",
+      "playerRoles": [
+        "Teacher",
+        "Expert",
+        "Beginner"
+      ],
+      "playersNeeded": 6,
+      "experienceLevel": "beginner",
+      "schedule": {
+        "days": [
+          "Thursday",
+          "Sunday"
+        ],
+        "time": "Afternoon",
+        "frequency": "Irregular"
+      },
+      "contactInfo": "Email us at CriticalHitGaming@gmail.com",
+      "createdAt": 1737177160718
+    },
+    "createdAt": 1737177160718
+  },
+  "86e2a638-cc3c-404d-b03c-bf5ed8929b6e": {
+    "id": "86e2a638-cc3c-404d-b03c-bf5ed8929b6e",
+    "name": "Warhammer 40K at London Geekout",
+    "description": "Join our Warhammer 40K group! Historic venue that's been hosting games for decades. We meet Tuesday, Monday evening.",
+    "latitude": 51.50274058122056,
+    "longitude": -0.006439637802988146,
+    "placeId": "place_id_476043",
+    "category": "premium",
+    "tags": [
+      "Evening",
+      "community",
+      "Competitive",
+      "Bi-weekly",
+      "Miniatures",
+      "Collector",
+      "Warhammer 40K"
+    ],
+    "gameType": "Warhammer 40K",
+    "addedBy": "user_1",
+    "communityData": {
+      "genre": "Miniatures",
+      "gameType": "Warhammer 40K",
+      "playerRoles": [
+        "Competitive",
+        "Collector"
+      ],
+      "playersNeeded": 3,
+      "experienceLevel": "all",
+      "schedule": {
+        "days": [
+          "Tuesday",
+          "Monday"
+        ],
+        "time": "Evening",
+        "frequency": "Bi-weekly"
+      },
+      "contactInfo": "Message on Meetup.com group: London Warhammer 40K",
+      "createdAt": 1740126978088
+    },
+    "createdAt": 1740126978088
+  },
+  "906d679c-316e-4b4b-bf0a-96c8959175db": {
+    "id": "906d679c-316e-4b4b-bf0a-96c8959175db",
+    "name": "Battletech at King's Cards",
+    "description": "Join our Battletech group! A cozy gaming cafe with plenty of tables for RPGs and board games. We meet Tuesday, Thursday, Monday flexible.",
+    "latitude": 51.4698831637708,
+    "longitude": -0.08805694925833776,
+    "placeId": "place_id_295155",
+    "category": "paid",
+    "tags": [
+      "Beginner",
+      "Teacher",
+      "community",
+      "Bi-weekly",
+      "Expert",
+      "Flexible",
+      "Miniatures",
+      "Battletech"
+    ],
+    "gameType": "Battletech",
+    "addedBy": "user_7",
+    "communityData": {
+      "genre": "Miniatures",
+      "gameType": "Battletech",
+      "playerRoles": [
+        "Expert",
+        "Beginner",
+        "Teacher"
+      ],
+      "playersNeeded": 1,
+      "experienceLevel": "beginner",
+      "schedule": {
+        "days": [
+          "Tuesday",
+          "Thursday",
+          "Monday"
+        ],
+        "time": "Flexible",
+        "frequency": "Bi-weekly"
+      },
+      "contactInfo": "Instagram: @KingsCardsGames",
+      "createdAt": 1742982853332
+    },
+    "createdAt": 1742982853332
+  },
+  "32efcf0e-8c18-4979-9ea5-40c27ef34108": {
+    "id": "32efcf0e-8c18-4979-9ea5-40c27ef34108",
+    "name": "DnD at The Gamer's Guild",
+    "description": "Join our DnD group! Casual drop-in space where you can always find a game. We meet Friday, Monday evening.",
+    "latitude": 51.3828559816142,
+    "longitude": -0.03568226240020643,
+    "placeId": "place_id_367641",
+    "category": "free",
+    "tags": [
+      "One-time",
+      "DnD",
+      "community",
+      "Both",
+      "TTRPG",
+      "Evening",
+      "DM"
+    ],
+    "gameType": "DnD",
+    "addedBy": "user_5",
+    "communityData": {
+      "genre": "TTRPG",
+      "gameType": "DnD",
+      "playerRoles": [
+        "DM",
+        "Both"
+      ],
+      "playersNeeded": 4,
+      "experienceLevel": "intermediate",
+      "schedule": {
+        "days": [
+          "Friday",
+          "Monday"
+        ],
+        "time": "Evening",
+        "frequency": "One-time"
+      },
+      "contactInfo": "Find us on Discord: DnDLondon",
+      "createdAt": 1741175274100
+    },
+    "createdAt": 1741175274100
+  },
+  "8fc3ec38-2b4a-4c73-a0c3-33bf5dc27e54": {
+    "id": "8fc3ec38-2b4a-4c73-a0c3-33bf5dc27e54",
+    "name": "Call of Cthulhu at Brixton Boardgamers",
+    "description": "Join our Call of Cthulhu group! Late-night gaming den with a focus on strategy games. We meet Wednesday, Saturday afternoon.",
+    "latitude": 51.384252318456035,
+    "longitude": -0.1941891372153077,
+    "placeId": "place_id_603995",
+    "category": "paid",
+    "tags": [
+      "Afternoon",
+      "One-time",
+      "Call of Cthulhu",
+      "Keeper",
+      "community",
+      "Player",
+      "Both",
+      "TTRPG"
+    ],
+    "gameType": "Call of Cthulhu",
+    "addedBy": "user_7",
+    "communityData": {
+      "genre": "TTRPG",
+      "gameType": "Call of Cthulhu",
+      "playerRoles": [
+        "Player",
+        "Keeper",
+        "Both"
+      ],
+      "playersNeeded": 5,
+      "experienceLevel": "all",
+      "schedule": {
+        "days": [
+          "Wednesday",
+          "Saturday"
+        ],
+        "time": "Afternoon",
+        "frequency": "One-time"
+      },
+      "contactInfo": "Message on Meetup.com group: London Call of Cthulhu",
+      "createdAt": 1738296950463
+    },
+    "createdAt": 1738296950463
+  },
+  "53f848f9-df64-444f-9f63-c1b3eda9dea0": {
+    "id": "53f848f9-df64-444f-9f63-c1b3eda9dea0",
+    "name": "Yu-Gi-Oh! at The War Room",
+    "description": "Join our Yu-Gi-Oh! group! A cozy gaming cafe with plenty of tables for RPGs and board games. We meet Wednesday, Monday, Friday morning.",
+    "latitude": 51.62506123821275,
+    "longitude": -0.2691276824875075,
+    "placeId": "place_id_979322",
+    "category": "free",
+    "tags": [
+      "Morning",
+      "Teacher",
+      "Yu-Gi-Oh!",
+      "CardGames",
+      "Irregular",
+      "community"
+    ],
+    "gameType": "Yu-Gi-Oh!",
+    "addedBy": "user_5",
+    "communityData": {
+      "genre": "CardGames",
+      "gameType": "Yu-Gi-Oh!",
+      "playerRoles": [
+        "Teacher"
+      ],
+      "playersNeeded": 1,
+      "experienceLevel": "intermediate",
+      "schedule": {
+        "days": [
+          "Wednesday",
+          "Monday",
+          "Friday"
+        ],
+        "time": "Morning",
+        "frequency": "Irregular"
+      },
+      "contactInfo": "Email us at TheWarRoom@gmail.com",
+      "createdAt": 1737523456842
+    },
+    "createdAt": 1737523456842
+  },
+  "3c11a313-d086-450a-a741-70f3fad820b1": {
+    "id": "3c11a313-d086-450a-a741-70f3fad820b1",
+    "name": "DnD at Pixel Paradise",
+    "description": "Join our DnD group! High-end gaming experience with premium components and service. We meet Saturday morning.",
+    "latitude": 51.4719617822682,
+    "longitude": -0.03993736841786695,
+    "placeId": "place_id_341352",
+    "category": "free",
+    "tags": [
+      "Morning",
+      "One-time",
+      "DnD",
+      "community",
+      "TTRPG",
+      "DM"
+    ],
+    "gameType": "DnD",
+    "addedBy": "user_10",
+    "communityData": {
+      "genre": "TTRPG",
+      "gameType": "DnD",
+      "playerRoles": [
+        "DM"
+      ],
+      "playersNeeded": 5,
+      "experienceLevel": "beginner",
+      "schedule": {
+        "days": [
+          "Saturday"
+        ],
+        "time": "Morning",
+        "frequency": "One-time"
+      },
+      "contactInfo": "Message on Meetup.com group: London DnD",
+      "createdAt": 1743251108278
+    },
+    "createdAt": 1743251108278
+  },
+  "e749b113-750f-47ea-a268-37af28e1beda": {
+    "id": "e749b113-750f-47ea-a268-37af28e1beda",
+    "name": "Yu-Gi-Oh! at Knight's Table Games",
+    "description": "Join our Yu-Gi-Oh! group! Late-night gaming den with a focus on strategy games. We meet Saturday, Thursday night.",
+    "latitude": 51.47940066928289,
+    "longitude": -0.04172797055246359,
+    "placeId": "place_id_571901",
+    "category": "free",
+    "tags": [
+      "Yu-Gi-Oh!",
+      "Night",
+      "CardGames",
+      "community",
+      "Competitive",
+      "Bi-weekly",
+      "Casual"
+    ],
+    "gameType": "Yu-Gi-Oh!",
+    "addedBy": "user_6",
+    "communityData": {
+      "genre": "CardGames",
+      "gameType": "Yu-Gi-Oh!",
+      "playerRoles": [
+        "Competitive",
+        "Casual"
+      ],
+      "playersNeeded": 1,
+      "experienceLevel": "experienced",
+      "schedule": {
+        "days": [
+          "Saturday",
+          "Thursday"
+        ],
+        "time": "Night",
+        "frequency": "Bi-weekly"
+      },
+      "contactInfo": "Message on Meetup.com group: London Yu-Gi-Oh!",
+      "createdAt": 1740155246021
+    },
+    "createdAt": 1740155246021
+  },
+  "785aea57-d5c8-477f-8fe1-34ca75db810a": {
+    "id": "785aea57-d5c8-477f-8fe1-34ca75db810a",
+    "name": "Battletech at Pixel Paradise",
+    "description": "Join our Battletech group! Competitive scene with regular tournaments and leagues. We meet Sunday night.",
+    "latitude": 51.40876151563834,
+    "longitude": -0.2692762709735293,
+    "placeId": "place_id_432375",
+    "category": "premium",
+    "tags": [
+      "Teacher",
+      "Night",
+      "community",
+      "Competitive",
+      "Monthly",
+      "Expert",
+      "Miniatures",
+      "Battletech"
+    ],
+    "gameType": "Battletech",
+    "addedBy": "user_2",
+    "communityData": {
+      "genre": "Miniatures",
+      "gameType": "Battletech",
+      "playerRoles": [
+        "Teacher",
+        "Expert",
+        "Competitive"
+      ],
+      "playersNeeded": 2,
+      "experienceLevel": "all",
+      "schedule": {
+        "days": [
+          "Sunday"
+        ],
+        "time": "Night",
+        "frequency": "Monthly"
+      },
+      "contactInfo": "Instagram: @PixelParadiseGames",
+      "createdAt": 1740892759924
+    },
+    "createdAt": 1740892759924
+  },
+  "56b00080-55df-43bb-84b4-f5459e4d611b": {
+    "id": "56b00080-55df-43bb-84b4-f5459e4d611b",
+    "name": "Scrabble at The Miniature Paintbox",
+    "description": "Join our Scrabble group! Spacious venue with a dedicated area for wargaming and painting. We meet Tuesday, Friday morning.",
+    "latitude": 51.62848994988433,
+    "longitude": 0.05705609203411835,
+    "placeId": "place_id_559020",
+    "category": "free",
+    "tags": [
+      "Morning",
+      "Beginner",
+      "Irregular",
+      "community",
+      "Competitive",
+      "Scrabble",
+      "BoardGames",
+      "Casual"
+    ],
+    "gameType": "Scrabble",
+    "addedBy": "user_1",
+    "communityData": {
+      "genre": "BoardGames",
+      "gameType": "Scrabble",
+      "playerRoles": [
+        "Competitive",
+        "Beginner",
+        "Casual"
+      ],
+      "playersNeeded": 3,
+      "experienceLevel": "all",
+      "schedule": {
+        "days": [
+          "Tuesday",
+          "Friday"
+        ],
+        "time": "Morning",
+        "frequency": "Irregular"
+      },
+      "contactInfo": "Contact the organizer at 07XX-XXX-XXX",
+      "createdAt": 1740738479001
+    },
+    "createdAt": 1740738479001
+  },
+  "6c3e026d-41f8-4d7a-bfe3-ca68e69d2f92": {
+    "id": "6c3e026d-41f8-4d7a-bfe3-ca68e69d2f92",
+    "name": "Mancala at The Dragon's Lair Gaming Cafe",
+    "description": "Join our Mancala group! Family-friendly environment that welcomes players of all ages. We meet Tuesday flexible.",
+    "latitude": 51.441457381602596,
+    "longitude": -0.146700414046665,
+    "placeId": "place_id_768661",
+    "category": "paid",
+    "tags": [
+      "Strategy",
+      "Flexible",
+      "community",
+      "Monthly",
+      "Expert",
+      "Mancala"
+    ],
+    "gameType": "Mancala",
+    "addedBy": "user_6",
+    "communityData": {
+      "genre": "Strategy",
+      "gameType": "Mancala",
+      "playerRoles": [
+        "Expert"
+      ],
+      "playersNeeded": 5,
+      "experienceLevel": "experienced",
+      "schedule": {
+        "days": [
+          "Tuesday"
+        ],
+        "time": "Flexible",
+        "frequency": "Monthly"
+      },
+      "contactInfo": "Find us on Discord: MancalaLondon",
+      "createdAt": 1738064311800
+    },
+    "createdAt": 1738064311800
+  },
+  "7eb655be-c1e4-4210-9bc7-14caf742e47a": {
+    "id": "7eb655be-c1e4-4210-9bc7-14caf742e47a",
+    "name": "Pathfinder at Blackfriars Board Games",
+    "description": "Join our Pathfinder group! Competitive scene with regular tournaments and leagues. We meet Tuesday, Monday night.",
+    "latitude": 51.55056290923811,
+    "longitude": -0.23128912265184942,
+    "placeId": "place_id_570804",
+    "category": "premium",
+    "tags": [
+      "Pathfinder",
+      "Night",
+      "One-time",
+      "community",
+      "GM",
+      "Player",
+      "Both",
+      "TTRPG"
+    ],
+    "gameType": "Pathfinder",
+    "addedBy": "user_7",
+    "communityData": {
+      "genre": "TTRPG",
+      "gameType": "Pathfinder",
+      "playerRoles": [
+        "Player",
+        "Both",
+        "GM"
+      ],
+      "playersNeeded": 4,
+      "experienceLevel": "beginner",
+      "schedule": {
+        "days": [
+          "Tuesday",
+          "Monday"
+        ],
+        "time": "Night",
+        "frequency": "One-time"
+      },
+      "contactInfo": "Facebook community: BlackfriarsBoardGames Players",
+      "createdAt": 1740959248658
+    },
+    "createdAt": 1740959248658
+  },
+  "95592ba7-1ab3-4148-8481-b6b69b66f0a3": {
+    "id": "95592ba7-1ab3-4148-8481-b6b69b66f0a3",
+    "name": "Yu-Gi-Oh! at Spell & Sword Club",
+    "description": "Join our Yu-Gi-Oh! group! A cozy gaming cafe with plenty of tables for RPGs and board games. We meet Wednesday night.",
+    "latitude": 51.61370918238994,
+    "longitude": -0.05287864296302676,
+    "placeId": "place_id_110457",
+    "category": "premium",
+    "tags": [
+      "Teacher",
+      "Yu-Gi-Oh!",
+      "CardGames",
+      "Night",
+      "Irregular",
+      "community",
+      "Competitive",
+      "Expert"
+    ],
+    "gameType": "Yu-Gi-Oh!",
+    "addedBy": "user_5",
+    "communityData": {
+      "genre": "CardGames",
+      "gameType": "Yu-Gi-Oh!",
+      "playerRoles": [
+        "Expert",
+        "Teacher",
+        "Competitive"
+      ],
+      "playersNeeded": 5,
+      "experienceLevel": "experienced",
+      "schedule": {
+        "days": [
+          "Wednesday"
+        ],
+        "time": "Night",
+        "frequency": "Irregular"
+      },
+      "contactInfo": "Find us on Discord: Yu-Gi-Oh!London",
+      "createdAt": 1737401469719
+    },
+    "createdAt": 1737401469719
+  },
+  "82f85a88-573b-45ae-bf1a-a578c74af1d9": {
+    "id": "82f85a88-573b-45ae-bf1a-a578c74af1d9",
+    "name": "Star Wars X-Wing at Notting Hill Game Night",
+    "description": "Join our Star Wars X-Wing group! Late-night gaming den with a focus on strategy games. We meet Monday, Wednesday, Sunday night.",
+    "latitude": 51.451353345670675,
+    "longitude": -0.11380044965915453,
+    "placeId": "place_id_906775",
+    "category": "premium",
+    "tags": [
+      "Teacher",
+      "Night",
+      "Irregular",
+      "community",
+      "Competitive",
+      "Star Wars X-Wing",
+      "Miniatures"
+    ],
+    "gameType": "Star Wars X-Wing",
+    "addedBy": "user_10",
+    "communityData": {
+      "genre": "Miniatures",
+      "gameType": "Star Wars X-Wing",
+      "playerRoles": [
+        "Competitive",
+        "Teacher"
+      ],
+      "playersNeeded": 4,
+      "experienceLevel": "experienced",
+      "schedule": {
+        "days": [
+          "Monday",
+          "Wednesday",
+          "Sunday"
+        ],
+        "time": "Night",
+        "frequency": "Irregular"
+      },
+      "contactInfo": "Join our WhatsApp group: link in bio",
+      "createdAt": 1737568405727
+    },
+    "createdAt": 1737568405727
+  },
+  "c98f4764-56e8-4780-a890-b1c6be039c48": {
+    "id": "c98f4764-56e8-4780-a890-b1c6be039c48",
+    "name": "Catan at The Miniature Paintbox",
+    "description": "Join our Catan group! Competitive scene with regular tournaments and leagues. We meet Sunday flexible.",
+    "latitude": 51.477567008073486,
+    "longitude": -0.18141925931908248,
+    "placeId": "place_id_688631",
+    "category": "free",
+    "tags": [
+      "Catan",
+      "Teacher",
+      "Weekly",
+      "Flexible",
+      "community",
+      "Competitive",
+      "BoardGames"
+    ],
+    "gameType": "Catan",
+    "addedBy": "user_2",
+    "communityData": {
+      "genre": "BoardGames",
+      "gameType": "Catan",
+      "playerRoles": [
+        "Competitive",
+        "Teacher"
+      ],
+      "playersNeeded": 3,
+      "experienceLevel": "experienced",
+      "schedule": {
+        "days": [
+          "Sunday"
+        ],
+        "time": "Flexible",
+        "frequency": "Weekly"
+      },
+      "contactInfo": "Instagram: @TheMiniaturePaintboxGames",
+      "createdAt": 1741376546880
+    },
+    "createdAt": 1741376546880
+  },
+  "6c6abb5f-120e-4c71-b378-0c43e94b1f2d": {
+    "id": "6c6abb5f-120e-4c71-b378-0c43e94b1f2d",
+    "name": "Warhammer 40K at The Dice Tower",
+    "description": "Join our Warhammer 40K group! Academic atmosphere for serious game enthusiasts. We meet Tuesday flexible.",
+    "latitude": 51.61632755796046,
+    "longitude": -0.28920558424778453,
+    "placeId": "place_id_294404",
+    "category": "paid",
+    "tags": [
+      "One-time",
+      "Casual",
+      "community",
+      "Competitive",
+      "Flexible",
+      "Miniatures",
+      "Collector",
+      "Warhammer 40K"
+    ],
+    "gameType": "Warhammer 40K",
+    "addedBy": "user_5",
+    "communityData": {
+      "genre": "Miniatures",
+      "gameType": "Warhammer 40K",
+      "playerRoles": [
+        "Casual",
+        "Collector",
+        "Competitive"
+      ],
+      "playersNeeded": 4,
+      "experienceLevel": "intermediate",
+      "schedule": {
+        "days": [
+          "Tuesday"
+        ],
+        "time": "Flexible",
+        "frequency": "One-time"
+      },
+      "contactInfo": "Message on Meetup.com group: London Warhammer 40K",
+      "createdAt": 1741556320892
+    },
+    "createdAt": 1741556320892
+  },
+  "1d970c07-8d01-4753-9436-4b3a7c7e5529": {
+    "id": "1d970c07-8d01-4753-9436-4b3a7c7e5529",
+    "name": "DnD at Queen's Gambit",
+    "description": "Join our DnD group! Spacious venue with a dedicated area for wargaming and painting. We meet Sunday, Friday, Monday morning.",
+    "latitude": 51.62176666906071,
+    "longitude": 0.008284961023040355,
+    "placeId": "place_id_207494",
+    "category": "free",
+    "tags": [
+      "Morning",
+      "One-time",
+      "DnD",
+      "community",
+      "Player",
+      "TTRPG",
+      "DM"
+    ],
+    "gameType": "DnD",
+    "addedBy": "user_10",
+    "communityData": {
+      "genre": "TTRPG",
+      "gameType": "DnD",
+      "playerRoles": [
+        "Player",
+        "DM"
+      ],
+      "playersNeeded": 4,
+      "experienceLevel": "experienced",
+      "schedule": {
+        "days": [
+          "Sunday",
+          "Friday",
+          "Monday"
+        ],
+        "time": "Morning",
+        "frequency": "One-time"
+      },
+      "contactInfo": "Find us on Discord: DnDLondon",
+      "createdAt": 1744162921311
+    },
+    "createdAt": 1744162921311
+  },
+  "20b4bfe9-0974-432f-b74d-817503396c4c": {
+    "id": "20b4bfe9-0974-432f-b74d-817503396c4c",
+    "name": "Call of Cthulhu at Soho Strategy Center",
+    "description": "Join our Call of Cthulhu group! Family-friendly environment that welcomes players of all ages. We meet Friday, Sunday afternoon.",
+    "latitude": 51.63133197484182,
+    "longitude": -0.13821874670944018,
+    "placeId": "place_id_137686",
+    "category": "free",
+    "tags": [
+      "Afternoon",
+      "Call of Cthulhu",
+      "Keeper",
+      "community",
+      "Bi-weekly",
+      "Player",
+      "Both",
+      "TTRPG"
+    ],
+    "gameType": "Call of Cthulhu",
+    "addedBy": "user_9",
+    "communityData": {
+      "genre": "TTRPG",
+      "gameType": "Call of Cthulhu",
+      "playerRoles": [
+        "Both",
+        "Keeper",
+        "Player"
+      ],
+      "playersNeeded": 6,
+      "experienceLevel": "beginner",
+      "schedule": {
+        "days": [
+          "Friday",
+          "Sunday"
+        ],
+        "time": "Afternoon",
+        "frequency": "Bi-weekly"
+      },
+      "contactInfo": "Facebook community: SohoStrategyCenter Players",
+      "createdAt": 1741138333607
+    },
+    "createdAt": 1741138333607
+  },
+  "93dd8a3b-c917-4776-8227-a66e97e76d94": {
+    "id": "93dd8a3b-c917-4776-8227-a66e97e76d94",
+    "name": "Backgammon at Greenwich Gamer's Guild",
+    "description": "Join our Backgammon group! Casual drop-in space where you can always find a game. We meet Saturday afternoon.",
+    "latitude": 51.527966040488145,
+    "longitude": -0.10398837509842801,
+    "placeId": "place_id_733091",
+    "category": "paid",
+    "tags": [
+      "Afternoon",
+      "Strategy",
+      "Beginner",
+      "Teacher",
+      "Backgammon",
+      "community",
+      "Bi-weekly"
+    ],
+    "gameType": "Backgammon",
+    "addedBy": "user_10",
+    "communityData": {
+      "genre": "Strategy",
+      "gameType": "Backgammon",
+      "playerRoles": [
+        "Teacher",
+        "Beginner"
+      ],
+      "playersNeeded": 4,
+      "experienceLevel": "intermediate",
+      "schedule": {
+        "days": [
+          "Saturday"
+        ],
+        "time": "Afternoon",
+        "frequency": "Bi-weekly"
+      },
+      "contactInfo": "Contact the organizer at 07XX-XXX-XXX",
+      "createdAt": 1740595938617
+    },
+    "createdAt": 1740595938617
+  },
+  "1213d5fb-3e18-4c35-aa86-5ae518c205ca": {
+    "id": "1213d5fb-3e18-4c35-aa86-5ae518c205ca",
+    "name": "Infinity at The Miniature Paintbox",
+    "description": "Join our Infinity group! Competitive scene with regular tournaments and leagues. We meet Saturday night.",
+    "latitude": 51.50937454547741,
+    "longitude": 0.04658671928781424,
+    "placeId": "place_id_661728",
+    "category": "paid",
+    "tags": [
+      "Beginner",
+      "Night",
+      "Infinity",
+      "community",
+      "Monthly",
+      "Expert",
+      "Miniatures"
+    ],
+    "gameType": "Infinity",
+    "addedBy": "user_8",
+    "communityData": {
+      "genre": "Miniatures",
+      "gameType": "Infinity",
+      "playerRoles": [
+        "Beginner",
+        "Expert"
+      ],
+      "playersNeeded": 6,
+      "experienceLevel": "all",
+      "schedule": {
+        "days": [
+          "Saturday"
+        ],
+        "time": "Night",
+        "frequency": "Monthly"
+      },
+      "contactInfo": "Find us on Discord: InfinityLondon",
+      "createdAt": 1742984493251
+    },
+    "createdAt": 1742984493251
+  },
+  "2562736d-097d-4620-82ac-594bf97e8389": {
+    "id": "2562736d-097d-4620-82ac-594bf97e8389",
+    "name": "Pok\u00e9mon TCG at Queen's Gambit",
+    "description": "Join our Pok\u00e9mon TCG group! Spacious venue with a dedicated area for wargaming and painting. We meet Saturday flexible.",
+    "latitude": 51.61516712645156,
+    "longitude": -0.06070134407989196,
+    "placeId": "place_id_983867",
+    "category": "paid",
+    "tags": [
+      "CardGames",
+      "Pok\u00e9mon TCG",
+      "Irregular",
+      "community",
+      "Competitive",
+      "Flexible",
+      "Casual"
+    ],
+    "gameType": "Pok\u00e9mon TCG",
+    "addedBy": "user_8",
+    "communityData": {
+      "genre": "CardGames",
+      "gameType": "Pok\u00e9mon TCG",
+      "playerRoles": [
+        "Competitive",
+        "Casual"
+      ],
+      "playersNeeded": 2,
+      "experienceLevel": "all",
+      "schedule": {
+        "days": [
+          "Saturday"
+        ],
+        "time": "Flexible",
+        "frequency": "Irregular"
+      },
+      "contactInfo": "Message on Meetup.com group: London Pok\u00e9mon TCG",
+      "createdAt": 1743574477243
+    },
+    "createdAt": 1743574477243
+  },
+  "1fbf1b76-c00c-4f2c-967c-df5c8cbf526c": {
+    "id": "1fbf1b76-c00c-4f2c-967c-df5c8cbf526c",
+    "name": "Star Wars X-Wing at Circuit Breaker Arcade",
+    "description": "Join our Star Wars X-Wing group! Spacious venue with a dedicated area for wargaming and painting. We meet Wednesday, Friday, Monday morning.",
+    "latitude": 51.53839972071993,
+    "longitude": -0.256980506492677,
+    "placeId": "place_id_802624",
+    "category": "free",
+    "tags": [
+      "Morning",
+      "Beginner",
+      "One-time",
+      "community",
+      "Star Wars X-Wing",
+      "Miniatures"
+    ],
+    "gameType": "Star Wars X-Wing",
+    "addedBy": "user_3",
+    "communityData": {
+      "genre": "Miniatures",
+      "gameType": "Star Wars X-Wing",
+      "playerRoles": [
+        "Beginner"
+      ],
+      "playersNeeded": 6,
+      "experienceLevel": "intermediate",
+      "schedule": {
+        "days": [
+          "Wednesday",
+          "Friday",
+          "Monday"
+        ],
+        "time": "Morning",
+        "frequency": "One-time"
+      },
+      "contactInfo": "Facebook community: CircuitBreakerArcade Players",
+      "createdAt": 1741083815932
+    },
+    "createdAt": 1741083815932
+  },
+  "545286bd-754a-4ff1-aaec-d2864a68730d": {
+    "id": "545286bd-754a-4ff1-aaec-d2864a68730d",
+    "name": "Catan at The Miniature Paintbox",
+    "description": "Join our Catan group! Spacious venue with a dedicated area for wargaming and painting. We meet Friday, Tuesday night.",
+    "latitude": 51.47218585525065,
+    "longitude": -0.0713703523301446,
+    "placeId": "place_id_630559",
+    "category": "free",
+    "tags": [
+      "Catan",
+      "Night",
+      "Irregular",
+      "community",
+      "BoardGames",
+      "Casual"
+    ],
+    "gameType": "Catan",
+    "addedBy": "user_8",
+    "communityData": {
+      "genre": "BoardGames",
+      "gameType": "Catan",
+      "playerRoles": [
+        "Casual"
+      ],
+      "playersNeeded": 3,
+      "experienceLevel": "experienced",
+      "schedule": {
+        "days": [
+          "Friday",
+          "Tuesday"
+        ],
+        "time": "Night",
+        "frequency": "Irregular"
+      },
+      "contactInfo": "Contact the organizer at 07XX-XXX-XXX",
+      "createdAt": 1739712758554
+    },
+    "createdAt": 1739712758554
+  },
+  "f8f25a4b-e8a7-49ab-ac39-86e57bbcc29c": {
+    "id": "f8f25a4b-e8a7-49ab-ac39-86e57bbcc29c",
+    "name": "Star Wars X-Wing at Pawn & Rook Cafe",
+    "description": "Join our Star Wars X-Wing group! Casual drop-in space where you can always find a game. We meet Sunday, Wednesday flexible.",
+    "latitude": 51.450651003599944,
+    "longitude": 0.015358997822395748,
+    "placeId": "place_id_594050",
+    "category": "paid",
+    "tags": [
+      "Teacher",
+      "One-time",
+      "community",
+      "Star Wars X-Wing",
+      "Flexible",
+      "Miniatures"
+    ],
+    "gameType": "Star Wars X-Wing",
+    "addedBy": "user_5",
+    "communityData": {
+      "genre": "Miniatures",
+      "gameType": "Star Wars X-Wing",
+      "playerRoles": [
+        "Teacher"
+      ],
+      "playersNeeded": 2,
+      "experienceLevel": "intermediate",
+      "schedule": {
+        "days": [
+          "Sunday",
+          "Wednesday"
+        ],
+        "time": "Flexible",
+        "frequency": "One-time"
+      },
+      "contactInfo": "Contact the organizer at 07XX-XXX-XXX",
+      "createdAt": 1737947622753
+    },
+    "createdAt": 1737947622753
+  },
+  "0a5aea78-8ef9-42b1-8375-8267012c0dd7": {
+    "id": "0a5aea78-8ef9-42b1-8375-8267012c0dd7",
+    "name": "Yu-Gi-Oh! at Brixton Boardgamers",
+    "description": "Join our Yu-Gi-Oh! group! Casual drop-in space where you can always find a game. We meet Thursday, Wednesday, Monday morning.",
+    "latitude": 51.53880797363801,
+    "longitude": -0.011357092331834087,
+    "placeId": "place_id_707385",
+    "category": "premium",
+    "tags": [
+      "Morning",
+      "Yu-Gi-Oh!",
+      "CardGames",
+      "Irregular",
+      "community",
+      "Competitive",
+      "Casual"
+    ],
+    "gameType": "Yu-Gi-Oh!",
+    "addedBy": "user_7",
+    "communityData": {
+      "genre": "CardGames",
+      "gameType": "Yu-Gi-Oh!",
+      "playerRoles": [
+        "Competitive",
+        "Casual"
+      ],
+      "playersNeeded": 3,
+      "experienceLevel": "experienced",
+      "schedule": {
+        "days": [
+          "Thursday",
+          "Wednesday",
+          "Monday"
+        ],
+        "time": "Morning",
+        "frequency": "Irregular"
+      },
+      "contactInfo": "Instagram: @BrixtonBoardgamersGames",
+      "createdAt": 1742750538103
+    },
+    "createdAt": 1742750538103
+  },
+  "0b1f09f1-a28b-42a1-8208-e1525f4e58c3": {
+    "id": "0b1f09f1-a28b-42a1-8208-e1525f4e58c3",
+    "name": "Infinity at The Dragon's Lair Gaming Cafe",
+    "description": "Join our Infinity group! Late-night gaming den with a focus on strategy games. We meet Thursday, Tuesday, Saturday night.",
+    "latitude": 51.381570874424625,
+    "longitude": 0.07256441547934928,
+    "placeId": "place_id_667272",
+    "category": "free",
+    "tags": [
+      "Teacher",
+      "Night",
+      "Infinity",
+      "Irregular",
+      "community",
+      "Miniatures",
+      "Casual"
+    ],
+    "gameType": "Infinity",
+    "addedBy": "user_10",
+    "communityData": {
+      "genre": "Miniatures",
+      "gameType": "Infinity",
+      "playerRoles": [
+        "Casual",
+        "Teacher"
+      ],
+      "playersNeeded": 3,
+      "experienceLevel": "beginner",
+      "schedule": {
+        "days": [
+          "Thursday",
+          "Tuesday",
+          "Saturday"
+        ],
+        "time": "Night",
+        "frequency": "Irregular"
+      },
+      "contactInfo": "Contact the organizer at 07XX-XXX-XXX",
+      "createdAt": 1742842481973
+    },
+    "createdAt": 1742842481973
+  },
+  "a8da4c94-edc1-45a4-a104-81b06e47cb56": {
+    "id": "a8da4c94-edc1-45a4-a104-81b06e47cb56",
+    "name": "Hearthstone at Queen's Gambit",
+    "description": "Join our Hearthstone group! Spacious venue with a dedicated area for wargaming and painting. We meet Friday, Sunday, Saturday night.",
+    "latitude": 51.40254316146781,
+    "longitude": 0.056580886162578226,
+    "placeId": "place_id_379880",
+    "category": "free",
+    "tags": [
+      "Teacher",
+      "Night",
+      "CardGames",
+      "community",
+      "Bi-weekly",
+      "Expert",
+      "Casual",
+      "Hearthstone"
+    ],
+    "gameType": "Hearthstone",
+    "addedBy": "user_4",
+    "communityData": {
+      "genre": "CardGames",
+      "gameType": "Hearthstone",
+      "playerRoles": [
+        "Casual",
+        "Teacher",
+        "Expert"
+      ],
+      "playersNeeded": 4,
+      "experienceLevel": "beginner",
+      "schedule": {
+        "days": [
+          "Friday",
+          "Sunday",
+          "Saturday"
+        ],
+        "time": "Night",
+        "frequency": "Bi-weekly"
+      },
+      "contactInfo": "Email us at QueensGambit@gmail.com",
+      "createdAt": 1737456971634
+    },
+    "createdAt": 1737456971634
+  },
+  "73767dc4-23f2-4cf0-b89b-50984f580eb0": {
+    "id": "73767dc4-23f2-4cf0-b89b-50984f580eb0",
+    "name": "Battletech at Queen's Gambit",
+    "description": "Join our Battletech group! High-end gaming experience with premium components and service. We meet Friday, Sunday evening.",
+    "latitude": 51.48904250672756,
+    "longitude": -0.1478780903986858,
+    "placeId": "place_id_950387",
+    "category": "free",
+    "tags": [
+      "Evening",
+      "Irregular",
+      "community",
+      "Expert",
+      "Miniatures",
+      "Battletech"
+    ],
+    "gameType": "Battletech",
+    "addedBy": "user_8",
+    "communityData": {
+      "genre": "Miniatures",
+      "gameType": "Battletech",
+      "playerRoles": [
+        "Expert"
+      ],
+      "playersNeeded": 5,
+      "experienceLevel": "beginner",
+      "schedule": {
+        "days": [
+          "Friday",
+          "Sunday"
+        ],
+        "time": "Evening",
+        "frequency": "Irregular"
+      },
+      "contactInfo": "Email us at QueensGambit@gmail.com",
+      "createdAt": 1738236163588
+    },
+    "createdAt": 1738236163588
+  }
+}

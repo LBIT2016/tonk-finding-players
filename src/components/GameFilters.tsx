@@ -1,38 +1,27 @@
 import React, { useState } from 'react';
-import { Filter, X } from 'lucide-react';
+import { Filter, X, ChevronDown, ChevronUp, Clock, Users, Star, Calendar, Tag } from 'lucide-react';
+import { 
+  FilterOptions, 
+  GAME_CATEGORIES, 
+  PLAYER_TYPES, 
+  DAYS_OF_WEEK,
+  EXPERIENCE_LEVELS,
+  EXPERIENCE_LEVEL_LABELS
+} from '../types/gameTypes';
 
 interface GameFiltersProps {
-  onFilterChange: (filters: {
-    genre?: string | null;
-    game?: string | null;
-    playerType?: string | null;
-  }) => void;
+  onFilterChange: (filters: FilterOptions) => void;
 }
 
 const GameFilters: React.FC<GameFiltersProps> = ({ onFilterChange }) => {
   const [genreFilter, setGenreFilter] = useState<string | null>(null);
   const [gameFilter, setGameFilter] = useState<string | null>(null);
   const [playerTypeFilter, setPlayerTypeFilter] = useState<string | null>(null);
-  
-  // Sample data - this would ideally come from a store
-  const genres = ['TTRPG', 'FPS', 'Strategy', 'MMORPG', 'Puzzle', 'Sports'];
-  
-  const games = {
-    'TTRPG': ['DND', 'Pathfinder', 'Call of Cthulhu', 'LARP'],
-    'FPS': ['Counter-Strike', 'Valorant', 'Call of Duty', 'Apex Legends'],
-    'Strategy': ['Civilization', 'Age of Empires', 'StarCraft'],
-    'MMORPG': ['World of Warcraft', 'Final Fantasy XIV', 'Elder Scrolls Online'],
-    'Puzzle': ['Sudoku', 'Crossword', 'Tetris', 'Chess'],
-    'Sports': ['FIFA', 'NBA 2K', 'Madden NFL', 'F1']
-  };
-  
-  const playerTypes = {
-    'DND': ['Player', 'GM', 'Both'],
-    'Pathfinder': ['Player', 'GM', 'Both'],
-    'Call of Cthulhu': ['Player', 'Keeper', 'Both'],
-    'LARP': ['Player', 'Organizer', 'Both'],
-    'default': ['Casual', 'Competitive', 'Social', 'Hardcore']
-  };
+  const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
+  const [experienceLevelFilter, setExperienceLevelFilter] = useState<string | null>(null);
+  const [playersNeededFilter, setPlayersNeededFilter] = useState<number | null>(null);
+  const [scheduleDaysFilter, setScheduleDaysFilter] = useState<string[]>([]);
+  const [recentlyAddedFilter, setRecentlyAddedFilter] = useState(false);
   
   // Apple design system colors
   const appleColors = {
@@ -54,40 +43,64 @@ const GameFilters: React.FC<GameFiltersProps> = ({ onFilterChange }) => {
   };
   
   // Get the available games based on selected genre
-  const availableGames = genreFilter ? games[genreFilter as keyof typeof games] || [] : [];
+  const availableGames = genreFilter ? GAME_CATEGORIES[genreFilter] || [] : [];
   
   // Get the available player types based on selected game
-  const availablePlayerTypes = gameFilter && gameFilter in playerTypes 
-    ? playerTypes[gameFilter as keyof typeof playerTypes]
-    : playerTypes.default;
+  const availablePlayerTypes = gameFilter && gameFilter in PLAYER_TYPES 
+    ? PLAYER_TYPES[gameFilter as keyof typeof PLAYER_TYPES]
+    : PLAYER_TYPES.default;
   
-  const updateFilters = (
-    genre: string | null = genreFilter,
-    game: string | null = gameFilter,
-    playerType: string | null = playerTypeFilter
-  ) => {
-    setGenreFilter(genre);
-    setGameFilter(game);
-    setPlayerTypeFilter(playerType);
-    
+  const updateFilters = () => {
     onFilterChange({
-      genre,
-      game,
-      playerType
+      genre: genreFilter,
+      game: gameFilter,
+      playerType: playerTypeFilter,
+      experienceLevel: experienceLevelFilter,
+      playersNeeded: playersNeededFilter,
+      scheduleDays: scheduleDaysFilter.length > 0 ? scheduleDaysFilter : null,
+      recentlyAdded: recentlyAddedFilter
     });
   };
+  
+  // Update filters whenever any filter changes
+  React.useEffect(() => {
+    updateFilters();
+  }, [
+    genreFilter, 
+    gameFilter, 
+    playerTypeFilter, 
+    experienceLevelFilter, 
+    playersNeededFilter, 
+    scheduleDaysFilter, 
+    recentlyAddedFilter
+  ]);
   
   const clearAllFilters = () => {
     setGenreFilter(null);
     setGameFilter(null);
     setPlayerTypeFilter(null);
-    
-    onFilterChange({
-      genre: null,
-      game: null,
-      playerType: null
-    });
+    setExperienceLevelFilter(null);
+    setPlayersNeededFilter(null);
+    setScheduleDaysFilter([]);
+    setRecentlyAddedFilter(false);
   };
+  
+  const toggleScheduleDay = (day: string) => {
+    if (scheduleDaysFilter.includes(day)) {
+      setScheduleDaysFilter(scheduleDaysFilter.filter(d => d !== day));
+    } else {
+      setScheduleDaysFilter([...scheduleDaysFilter, day]);
+    }
+  };
+  
+  const anyFiltersActive = 
+    genreFilter !== null || 
+    gameFilter !== null || 
+    playerTypeFilter !== null || 
+    experienceLevelFilter !== null || 
+    playersNeededFilter !== null || 
+    scheduleDaysFilter.length > 0 || 
+    recentlyAddedFilter;
   
   return (
     <div
@@ -106,7 +119,7 @@ const GameFilters: React.FC<GameFiltersProps> = ({ onFilterChange }) => {
           Game Filters
         </h3>
         
-        {(genreFilter || gameFilter || playerTypeFilter) && (
+        {anyFiltersActive && (
           <button
             onClick={clearAllFilters}
             className="text-xs rounded-full text-red-500 hover:text-red-600"
@@ -116,7 +129,6 @@ const GameFilters: React.FC<GameFiltersProps> = ({ onFilterChange }) => {
         )}
       </div>
 
-      {/* No changes to the actual filter UI */}
       <div className="p-4">
         {/* Genre Filter */}
         <div className="mb-4">
@@ -124,7 +136,7 @@ const GameFilters: React.FC<GameFiltersProps> = ({ onFilterChange }) => {
             GENRE
           </label>
           <div className="flex flex-wrap gap-2">
-            {genres.map(genre => (
+            {Object.keys(GAME_CATEGORIES).map(genre => (
               <button
                 key={genre}
                 className="px-3 py-1.5 text-sm rounded-full border"
@@ -134,11 +146,17 @@ const GameFilters: React.FC<GameFiltersProps> = ({ onFilterChange }) => {
                   color: genreFilter === genre ? appleColors.blue : appleColors.text.secondary,
                   fontWeight: genreFilter === genre ? 500 : 400,
                 }}
-                onClick={() => updateFilters(
-                  genreFilter === genre ? null : genre, 
-                  null, 
-                  null
-                )}
+                onClick={() => {
+                  if (genreFilter === genre) {
+                    setGenreFilter(null);
+                    setGameFilter(null);
+                    setPlayerTypeFilter(null);
+                  } else {
+                    setGenreFilter(genre);
+                    setGameFilter(null);
+                    setPlayerTypeFilter(null);
+                  }
+                }}
               >
                 {genre}
                 {genreFilter === genre && (
@@ -166,11 +184,15 @@ const GameFilters: React.FC<GameFiltersProps> = ({ onFilterChange }) => {
                     color: gameFilter === game ? appleColors.purple : appleColors.text.secondary,
                     fontWeight: gameFilter === game ? 500 : 400,
                   }}
-                  onClick={() => updateFilters(
-                    genreFilter,
-                    gameFilter === game ? null : game,
-                    null
-                  )}
+                  onClick={() => {
+                    if (gameFilter === game) {
+                      setGameFilter(null);
+                      setPlayerTypeFilter(null);
+                    } else {
+                      setGameFilter(game);
+                      setPlayerTypeFilter(null);
+                    }
+                  }}
                 >
                   {game}
                   {gameFilter === game && (
@@ -199,11 +221,9 @@ const GameFilters: React.FC<GameFiltersProps> = ({ onFilterChange }) => {
                     color: playerTypeFilter === type ? appleColors.orange : appleColors.text.secondary,
                     fontWeight: playerTypeFilter === type ? 500 : 400,
                   }}
-                  onClick={() => updateFilters(
-                    genreFilter,
-                    gameFilter,
-                    playerTypeFilter === type ? null : type
-                  )}
+                  onClick={() => {
+                    setPlayerTypeFilter(playerTypeFilter === type ? null : type);
+                  }}
                 >
                   {type}
                   {playerTypeFilter === type && (
@@ -215,8 +235,135 @@ const GameFilters: React.FC<GameFiltersProps> = ({ onFilterChange }) => {
           </div>
         )}
         
+        {/* Advanced Filters Toggle */}
+        <button
+          onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
+          className="w-full py-2 px-3 mt-2 mb-3 text-sm rounded-lg flex items-center justify-between"
+          style={{
+            backgroundColor: showAdvancedFilters ? `${appleColors.blue}10` : "white",
+            color: appleColors.blue,
+            border: `1px solid ${showAdvancedFilters ? appleColors.blue : appleColors.gray.medium}`
+          }}
+        >
+          <span className="font-medium">Advanced Filters</span>
+          {showAdvancedFilters ? 
+            <ChevronUp className="h-4 w-4" /> : 
+            <ChevronDown className="h-4 w-4" />
+          }
+        </button>
+        
+        {/* Advanced Filters Section */}
+        {showAdvancedFilters && (
+          <div className="space-y-4 mt-4 p-3 border border-gray-200 rounded-lg bg-white">
+            {/* Experience Level Filter */}
+            <div>
+              <label className="flex items-center gap-1 text-xs font-medium mb-2 text-gray-500">
+                <Star className="h-3.5 w-3.5" /> EXPERIENCE LEVEL
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {EXPERIENCE_LEVELS.map(level => (
+                  <button
+                    key={level}
+                    className="px-3 py-1.5 text-sm rounded-full border"
+                    style={{
+                      backgroundColor: experienceLevelFilter === level ? `${appleColors.yellow}15` : "white",
+                      borderColor: experienceLevelFilter === level ? appleColors.yellow : appleColors.gray.medium,
+                      color: experienceLevelFilter === level ? "#B3750A" : appleColors.text.secondary,
+                      fontWeight: experienceLevelFilter === level ? 500 : 400,
+                    }}
+                    onClick={() => {
+                      setExperienceLevelFilter(experienceLevelFilter === level ? null : level);
+                    }}
+                  >
+                    {EXPERIENCE_LEVEL_LABELS[level]}
+                    {experienceLevelFilter === level && (
+                      <X className="h-3 w-3 ml-1 inline-block" />
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+            
+            {/* Players Needed Filter */}
+            <div>
+              <label className="flex items-center gap-1 text-xs font-medium mb-2 text-gray-500">
+                <Users className="h-3.5 w-3.5" /> PLAYERS NEEDED
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {[1, 2, 3, 4, 5].map(count => (
+                  <button
+                    key={count}
+                    className="px-3 py-1.5 text-sm rounded-full border"
+                    style={{
+                      backgroundColor: playersNeededFilter === count ? `${appleColors.green}15` : "white",
+                      borderColor: playersNeededFilter === count ? appleColors.green : appleColors.gray.medium,
+                      color: playersNeededFilter === count ? appleColors.green : appleColors.text.secondary,
+                      fontWeight: playersNeededFilter === count ? 500 : 400,
+                    }}
+                    onClick={() => {
+                      setPlayersNeededFilter(playersNeededFilter === count ? null : count);
+                    }}
+                  >
+                    {count === 1 ? "1 Player" : `${count}+ Players`}
+                    {playersNeededFilter === count && (
+                      <X className="h-3 w-3 ml-1 inline-block" />
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+            
+            {/* Schedule Filter */}
+            <div>
+              <label className="flex items-center gap-1 text-xs font-medium mb-2 text-gray-500">
+                <Calendar className="h-3.5 w-3.5" /> AVAILABLE DAYS
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {DAYS_OF_WEEK.map(day => (
+                  <button
+                    key={day}
+                    className="px-3 py-1.5 text-sm rounded-full border"
+                    style={{
+                      backgroundColor: scheduleDaysFilter.includes(day) ? `${appleColors.blue}15` : "white",
+                      borderColor: scheduleDaysFilter.includes(day) ? appleColors.blue : appleColors.gray.medium,
+                      color: scheduleDaysFilter.includes(day) ? appleColors.blue : appleColors.text.secondary,
+                      fontWeight: scheduleDaysFilter.includes(day) ? 500 : 400,
+                    }}
+                    onClick={() => toggleScheduleDay(day)}
+                  >
+                    {day.slice(0, 3)}
+                    {scheduleDaysFilter.includes(day) && (
+                      <X className="h-3 w-3 ml-1 inline-block" />
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+            
+            {/* Recently Added Filter */}
+            <div>
+              <button
+                className="px-3 py-1.5 text-sm rounded-full border flex items-center gap-1"
+                style={{
+                  backgroundColor: recentlyAddedFilter ? `${appleColors.purple}15` : "white",
+                  borderColor: recentlyAddedFilter ? appleColors.purple : appleColors.gray.medium,
+                  color: recentlyAddedFilter ? appleColors.purple : appleColors.text.secondary,
+                  fontWeight: recentlyAddedFilter ? 500 : 400,
+                }}
+                onClick={() => setRecentlyAddedFilter(!recentlyAddedFilter)}
+              >
+                <Clock className="h-3.5 w-3.5" />
+                Recently Added
+                {recentlyAddedFilter && (
+                  <X className="h-3 w-3 ml-1" />
+                )}
+              </button>
+            </div>
+          </div>
+        )}
+        
         {/* Applied filters summary */}
-        {(genreFilter || gameFilter || playerTypeFilter) && (
+        {anyFiltersActive && (
           <div className="mt-4 p-3 bg-white rounded-lg">
             <h4 className="text-xs font-medium text-gray-500 mb-2">ACTIVE FILTERS</h4>
             <div className="space-y-1 text-sm">
@@ -228,6 +375,20 @@ const GameFilters: React.FC<GameFiltersProps> = ({ onFilterChange }) => {
               )}
               {playerTypeFilter && (
                 <div>Player Type: <span className="font-medium">{playerTypeFilter}</span></div>
+              )}
+              {experienceLevelFilter && (
+                <div>Experience: <span className="font-medium">{EXPERIENCE_LEVEL_LABELS[experienceLevelFilter]}</span></div>
+              )}
+              {playersNeededFilter && (
+                <div>Players Needed: <span className="font-medium">
+                  {playersNeededFilter === 1 ? "1 Player" : `${playersNeededFilter}+ Players`}
+                </span></div>
+              )}
+              {scheduleDaysFilter.length > 0 && (
+                <div>Available: <span className="font-medium">{scheduleDaysFilter.map(d => d.slice(0, 3)).join(', ')}</span></div>
+              )}
+              {recentlyAddedFilter && (
+                <div><span className="font-medium">Recently Added</span></div>
               )}
             </div>
           </div>
